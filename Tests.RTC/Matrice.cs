@@ -386,17 +386,26 @@ namespace Tests.RTC
             a.SetRow(2, new decimal[] { -4, 4, 4, 1 });
             a.SetRow(3, new decimal[] { -6, 5, -1, 1 });
 
+            var identity = RTF.Matrix.GetIdentity(4, 4);
+            Assert.Equal(identity, identity.Inverse());
+
             var idInverted = a * a.Inverse();
+            Assert.True(identity.Equals(idInverted, 0)
+                , $"Expected : {identity.ToString()}\nActual: {idInverted.ToString()}");
 
             var transposeInvert = a.Transpose().Inverse();
             var invertTranspose = a.Inverse().Transpose();
-
-            var identity = RTF.Matrix.GetIdentity(4, 4);
-            Assert.Equal(identity, identity.Inverse());
-            Assert.True(identity.Equals(idInverted, 0)
-                , $"Expected : {identity.ToString()}\nActual: {idInverted.ToString()}");
             Assert.True(transposeInvert.Equals(invertTranspose, 0)
                 , $"Expected : {transposeInvert.ToString()}\nActual: {invertTranspose.ToString()}");
+
+            var modifiedIdentity = RTF.Matrix.GetIdentity(4,4);
+            modifiedIdentity[2,2] = 6;
+            var tuple = new decimal[] { 1, 2, 3, 4 };
+            var tupleIdentity = identity * tuple;
+            var newTuple = modifiedIdentity * tuple;
+
+            Assert.Equal(tuple, tupleIdentity);
+            Assert.NotEqual(tuple, newTuple);
         }
     }
 }
