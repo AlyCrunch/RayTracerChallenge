@@ -57,6 +57,7 @@
     <Compile Include="Helpers\Projectile.cs" />
     <Compile Include="Helpers\TConverter.cs" />
     <Compile Include="Helpers\ArrayExtension.cs" />
+    <Compile Include="Helpers\Transformations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

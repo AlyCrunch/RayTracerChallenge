@@ -243,6 +243,14 @@ namespace RayTracerChallenge.Features
                    (Z.CompareTo(coords.Z) == 0) &&
                    (W.CompareTo(coords.W) == 0);
         }
+        public bool Equals(object obj, int precision)
+        {
+            var coords = obj as PointType<T>;
+            return (X.CompareTo(coords.X) == 0) &&
+                   (Y.CompareTo(coords.Y) == 0) &&
+                   (Z.CompareTo(coords.Z) == 0) &&
+                   (W.CompareTo(coords.W) == 0);
+        }
         public override int GetHashCode()
         {
             return base.GetHashCode();
