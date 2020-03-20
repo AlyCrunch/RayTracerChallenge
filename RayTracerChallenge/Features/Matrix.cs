@@ -49,8 +49,7 @@ namespace RayTracerChallenge.Features
                 Content[i, index] = col[i];
             }
         }
-
-
+        
         public static Matrix Transpose(Matrix m)
         {
             var M = new Matrix(m.Width, m.Height);
@@ -207,13 +206,25 @@ namespace RayTracerChallenge.Features
             }
             return toReturn;
         }
+        public string ToString(string format)
+        {
+            string toReturn = $"Size = [{Width}x{Height}]\n";
+            for (int y = 0; y < Width; y++)
+            {
+                toReturn += $"| {string.Join(" | ", Content.GetRow(y).Select(x => x.ToString(format)))} |\n";
+            }
+            return toReturn;
+        }
         public override bool Equals(object obj)
         {
             Matrix m = (Matrix)obj;
-            int p = 5;
-
-            return Equals(m, p);
+            for (int x = 0; x < Height; x++)
+                for (int y = 0; y < Width; y++)
+                    if (this[x, y] != m[x, y])
+                        return false;
+            return true;
         }
+
         public bool Equals(Matrix m, int p)
         {
             for (int x = 0; x < Height; x++)

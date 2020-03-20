@@ -1,5 +1,6 @@
 ﻿using RTF = RayTracerChallenge.Features;
 using Xunit;
+using Tests.RTC.Helpers;
 
 namespace Tests.RTC
 {
@@ -339,7 +340,7 @@ namespace Tests.RTC
 
             var inverse = a.Inverse();
 
-            Assert.Equal(e, inverse);
+            CustomAssert.Equal(e, inverse, 5);
         }
         [Fact]
         public void Inverse3()
@@ -357,8 +358,8 @@ namespace Tests.RTC
             e.SetRow(3, new double[] { 0.17778, 0.06667, -0.26667, 0.33333 });
 
             var inverse = a.Inverse();
-            
-            Assert.Equal(e, inverse);
+
+            CustomAssert.Equal(e, inverse, 5);
         }
 
         [Fact]
@@ -379,8 +380,8 @@ namespace Tests.RTC
             var c = a * b;
             var e = c * b.Inverse();
 
-            Assert.True(e.Equals(a)
-                , $"Expected : {a.ToString()}\nActual: {e.ToString()}");
+
+            CustomAssert.Equal(e, a, 0);
         }
 
         [Fact]
@@ -396,13 +397,14 @@ namespace Tests.RTC
             Assert.Equal(identity, identity.Inverse());
 
             var idInverted = a * a.Inverse();
-            Assert.True(identity.Equals(idInverted)
-                , $"Expected : {identity.ToString()}\nActual: {idInverted.ToString()}");
+
+            CustomAssert.Equal(identity, idInverted, 0);
 
             var transposeInvert = a.Transpose().Inverse();
             var invertTranspose = a.Inverse().Transpose();
-            Assert.True(transposeInvert.Equals(invertTranspose)
-                , $"Expected : {transposeInvert.ToString()}\nActual: {invertTranspose.ToString()}");
+
+
+            CustomAssert.Equal(transposeInvert, invertTranspose, 5);
 
             var modifiedIdentity = RTF.Matrix.GetIdentity(4, 4);
             modifiedIdentity[2, 2] = 6;

@@ -203,7 +203,11 @@ namespace RayTracerChallenge.Features
         public string ToCoordinates() => $"[{X},{Y},{Z}]";
         public override string ToString()
         {
-            return $"[{X.ToString()},{Y.ToString()},{Z.ToString()},{W.ToString()}][{Type()}]";
+            return $"[{X.ToString()}, {Y.ToString()}, {Z.ToString()}, {W.ToString()}][{Type()}]";
+        }
+        public string ToString(string format)
+        {
+            return $"[{X.ToString(format)}, {Y.ToString(format)}, {Z.ToString(format)}, {W.ToString(format)}][{Type()}]";
         }
         public override bool Equals(object obj)
         {
@@ -213,13 +217,12 @@ namespace RayTracerChallenge.Features
                    (Z.CompareTo(coords.Z) == 0) &&
                    (W.CompareTo(coords.W) == 0);
         }
-        public bool Equals(object obj, int p)
+        public bool Equals(PointType pt, int p)
         {
-            var coords = obj as PointType;
-            return Math.Round(X, p) == Math.Round(coords.X, p) &&
-                   Math.Round(Y, p) == Math.Round(coords.Y, p) &&
-                   Math.Round(Z, p) == Math.Round(coords.Z, p) &&
-                   Math.Round(W, p) == Math.Round(coords.W, p);
+            return Math.Round(X, p) == Math.Round(pt.X, p) &&
+                   Math.Round(Y, p) == Math.Round(pt.Y, p) &&
+                   Math.Round(Z, p) == Math.Round(pt.Z, p) &&
+                   Math.Round(W, p) == Math.Round(pt.W, p);
         }
         public override int GetHashCode()
         {

@@ -2,6 +2,7 @@
 using RTH = RayTracerChallenge.Helpers;
 using System;
 using Xunit;
+using Tests.RTC.Helpers;
 
 namespace Tests.RTC
 {
@@ -86,7 +87,7 @@ namespace Tests.RTC
 
             var fullQuarter = RTH.Transformations.RotationX(Math.PI / 2);
             var expected2 = RTF.PointType.Point(0, 0, 1);
-            Assert.Equal(expected2, fullQuarter * p);
+            CustomAssert.Equal(expected2, fullQuarter * p, 0);
         }
     }
 }
