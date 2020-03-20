@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace RayTracerChallenge.Helpers
 {
-    public class Projectile<T> where T : IComparable<T>
+    public class Projectile
     {
-        public PointType<T> Position { get; set; }
-        public PointType<T> Velocity { get; set; }
+        public PointType Position { get; set; }
+        public PointType Velocity { get; set; }
 
-        public Projectile(PointType<T> p, PointType<T> v)
+        public Projectile(PointType p, PointType v)
         {
             Position = p;
             Velocity = v;
         }
 
-        public static IEnumerable<PointType<float>> GetTick(Environment<float> env,
-                                           Projectile<float> projectile)
+        public static IEnumerable<PointType> GetTick(Environment env,
+                                           Projectile projectile)
         {
             var coord = projectile.Position;
             var velocity = projectile.Velocity;
@@ -35,12 +35,12 @@ namespace RayTracerChallenge.Helpers
         }
     }
 
-    public class Environment<T> where T : IComparable<T>
+    public class Environment
     {
-        public PointType<T> Gravity { get; set; }
-        public PointType<T> Wind { get; set; }
+        public PointType Gravity { get; set; }
+        public PointType Wind { get; set; }
 
-        public Environment(PointType<T> g, PointType<T> w)
+        public Environment(PointType g, PointType w)
         {
             Gravity = g;
             Wind = w;

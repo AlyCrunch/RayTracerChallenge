@@ -7,7 +7,7 @@ using System.Windows.Shapes;
 using RayTracerChallenge.Features;
 using System.Text.RegularExpressions;
 using ctr = System.Windows.Controls;
-using RayTracerChallenge.Helpers;
+using RTH = RayTracerChallenge.Helpers;
 
 namespace Visual.RTC
 {
@@ -35,18 +35,18 @@ namespace Visual.RTC
         {
             DrawCanvas.Children.Clear();
 
-            var proj = new Projectile<float>(
-                    PointType<float>.Point(0, 1, 0),
-                    PointType<float>.Vector(1, 1, 0).Normalizing() * inc);
-            var env = new Environment<float>(
-                    PointType<float>.Vector(0, -0.1f, 0),
-                    PointType<float>.Vector(-0.01f, 0, 0));
+            var proj = new RTH.Projectile(
+                    PointType.Point(0, 1, 0),
+                    PointType.Vector(1, 1, 0).Normalizing() * inc);
+            var env = new RTH.Environment(
+                    PointType.Vector(0, -0.1, 0),
+                    PointType.Vector(-0.01, 0, 0));
 
-            foreach (var coord in Projectile<float>.GetTick(env, proj))
+            foreach (var coord in RTH.Projectile.GetTick(env, proj))
                 DrawCircle(coord.X, coord.Y);
         }
 
-        private void DrawCircle(float X, float Y)
+        private void DrawCircle(double X, double Y)
         {
             var r = (byte)rnd.Next(255);
             var g = (byte)rnd.Next(255);

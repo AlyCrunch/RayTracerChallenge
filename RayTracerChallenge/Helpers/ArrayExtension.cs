@@ -31,9 +31,9 @@ namespace RayTracerChallenge.Helpers
         //    return result;
         //}
 
-        public static decimal[] GetRow(this decimal[,] array, int row)
+        public static double[] GetRow(this double[,] array, int row)
         {
-            List<decimal> list = new List<decimal>();
+            List<double> list = new List<double>();
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 list.Add(array[row, i]);

@@ -9,9 +9,9 @@ namespace RayTracerChallenge.Features
 {
     public class Matrix
     {
-        public decimal[,] Content { get; set; }
+        public double[,] Content { get; set; }
 
-        public decimal this[int x, int y]
+        public double this[int x, int y]
         {
             get => Content[x, y];
             set
@@ -25,10 +25,10 @@ namespace RayTracerChallenge.Features
 
         public Matrix(int width, int height)
         {
-            Content = new decimal[width, height];
+            Content = new double[width, height];
         }
 
-        public void SetRow(int index, decimal[] line)
+        public void SetRow(int index, double[] line)
         {
             if (line.Length != Content.GetLength(0))
                 throw new Exception("Missing values");
@@ -39,7 +39,7 @@ namespace RayTracerChallenge.Features
             }
         }
 
-        public void SetColumn(int index, decimal[] col)
+        public void SetColumn(int index, double[] col)
         {
             if (col.Length != Content.GetLength(1))
                 throw new Exception("Missing values");
@@ -81,9 +81,9 @@ namespace RayTracerChallenge.Features
             return m;
         }
 
-        public static decimal Determinant(Matrix m)
+        public static double Determinant(Matrix m)
         {
-            decimal d = 0;
+            double d = 0;
             if (m.Height == 2 && m.Width == 2)
                 d = m[0, 0] * m[1, 1] - m[0, 1] * m[1, 0];
             else
@@ -92,7 +92,7 @@ namespace RayTracerChallenge.Features
 
             return d;
         }
-        public decimal Determinant() => Determinant(this);
+        public double Determinant() => Determinant(this);
 
         public static Matrix Submatrix(Matrix m, int row, int column)
         {
@@ -111,10 +111,10 @@ namespace RayTracerChallenge.Features
             return x;
         }
 
-        public static decimal Minor(Matrix m, int row, int column)
+        public static double Minor(Matrix m, int row, int column)
             => Determinant(Submatrix(m, row, column));
 
-        public static decimal Cofactor(Matrix m, int row, int column)
+        public static double Cofactor(Matrix m, int row, int column)
         {
             var minor = Minor(m, row, column);
             return ((row + column) % 2 == 0) ? minor : -minor;
@@ -161,7 +161,7 @@ namespace RayTracerChallenge.Features
             {
                 for (int y = 0; y < a.Height; y++)
                 {
-                    decimal value = 0;
+                    double value = 0;
                     for (int i = 0; i < a.Width; i++)
                     {
                         value += a[i, y] * b[x, i];
@@ -172,16 +172,16 @@ namespace RayTracerChallenge.Features
 
             return m;
         }
-        public static decimal[] operator *(Matrix a, decimal[] b)
+        public static double[] operator *(Matrix a, double[] b)
         {
-            List<decimal> m = new List<decimal>();
+            List<double> m = new List<double>();
 
             if (a.Width != b.Length || a.Height != a.Width)
                 throw new Exception("Not the same size.");
 
             for (int y = 0; y < a.Height; y++)
             {
-                decimal value = 0;
+                double value = 0;
                 for (int i = 0; i < a.Width; i++)
                 {
                     value += a[y, i] * b[i];
@@ -191,11 +191,11 @@ namespace RayTracerChallenge.Features
 
             return m.ToArray();
         }
-        public static PointType<decimal> operator *(Matrix a, PointType<decimal> b)
+        public static PointType operator *(Matrix a, PointType b)
         {
-            decimal[] arr = { b.X, b.Y, b.Z, b.W };
+            double[] arr = { b.X, b.Y, b.Z, b.W };
             var m = a * arr;
-            return new PointType<decimal>(m[0], m[1], m[2], m[3]);
+            return new PointType(m[0], m[1], m[2], m[3]);
         }
 
         public override string ToString()
@@ -209,31 +209,22 @@ namespace RayTracerChallenge.Features
         }
         public override bool Equals(object obj)
         {
-            Matrix matrice = (Matrix)obj;
-            for (int x = 0; x < Content.GetLength(0); x++)
-            {
-                for (int y = 0; y < Content.GetLength(1); y++)
-                {
-                    if (Content[x, y] != matrice.Content[x, y]) return false;
-                }
-            }
-            return true;
+            Matrix m = (Matrix)obj;
+            int p = 5;
+
+            return Equals(m, p);
         }
-        public bool Equals(object obj, int precision)
+        public bool Equals(Matrix m, int p)
         {
-            Matrix matrice = (Matrix)obj;
-            for (int x = 0; x < Content.GetLength(0); x++)
-            {
-                for (int y = 0; y < Content.GetLength(1); y++)
-                {
-                    if (decimal.Round(Content[x, y], precision) != decimal.Round(matrice.Content[x, y], precision)) return false;
-                }
-            }
+            for (int x = 0; x < Height; x++)
+                for (int y = 0; y < Width; y++)
+                    if (Math.Round(this[x, y], p) != Math.Round(m[x, y], p)) 
+                        return false;
             return true;
         }
         public override int GetHashCode()
         {
-            return EqualityComparer<decimal[,]>.Default.GetHashCode(Content);
+            return EqualityComparer<double[,]>.Default.GetHashCode(Content);
         }
         #endregion
     }

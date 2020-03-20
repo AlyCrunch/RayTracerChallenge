@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Features\Canvas.cs" />
     <Compile Include="Features\Color.cs" />
+    <Compile Include="Features\Comparer\MatrixEqualityComparer.cs" />
     <Compile Include="Features\Enums\Colors.cs" />
     <Compile Include="Features\Matrix.cs" />
     <Compile Include="Features\PointType.cs" />

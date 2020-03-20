@@ -39,7 +39,7 @@ namespace Tests.RTC
         {
             var expected = "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n" +
                            "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n" +
-                           "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n";
+                           "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255";
 
             var c = new RTF.Canvas(5, 3);
             var c1 = new RTF.Color(1.5m, 0, 0);

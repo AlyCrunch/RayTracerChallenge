@@ -1,104 +1,94 @@
-﻿using RayTracerChallenge.Helpers;
-using System.Linq;
+﻿using System.Linq;
 using System;
 
 namespace RayTracerChallenge.Features
 {
-    public class PointType<T> where T : IComparable<T>
+    public class PointType
     {
-        public PointType(T x, T y, T z, T w)
+        public PointType(double x, double y, double z, double w)
         {
             X = x;
             Y = y;
             Z = z;
             W = w;
-
-            Init();
-        }
-        private void Init()
-        {
-            zero = TConverter.ChangeType<T>(0);
-            one = TConverter.ChangeType<T>(1);
         }
 
-        public T X { get; set; }
-        public T Y { get; set; }
-        public T Z { get; set; }
-        public T W { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
+        public double W { get; set; }
 
-        private T zero;
-        private T one;
 
         public bool IsVector
         {
-            get => (W.CompareTo(zero) == 0) ? true : false;
+            get => (W == 0) ? true : false;
         }
         public bool IsPoint
         {
-            get => (W.CompareTo(one) == 0) ? true : false;
+            get => (W == 1) ? true : false;
         }
 
         #region Operators
-        public static PointType<T> operator +(PointType<T> a, PointType<T> b)
+        public static PointType operator +(PointType a, PointType b)
         {
-            return new PointType<T>(Add(a.X, b.X), Add(a.Y, b.Y), Add(a.Z, b.Z), Add(a.W, b.W));
+            return new PointType(Add(a.X, b.X), Add(a.Y, b.Y), Add(a.Z, b.Z), Add(a.W, b.W));
         }
-        public static PointType<T> operator -(PointType<T> a, PointType<T> b)
+        public static PointType operator -(PointType a, PointType b)
         {
-            return new PointType<T>(Subs(a.X, b.X), Subs(a.Y, b.Y), Subs(a.Z, b.Z), Subs(a.W, b.W));
+            return new PointType(Subs(a.X, b.X), Subs(a.Y, b.Y), Subs(a.Z, b.Z), Subs(a.W, b.W));
         }
-        public static PointType<T> operator -(PointType<T> a)
+        public static PointType operator -(PointType a)
         {
-            return new PointType<T>(Neg(a.X), Neg(a.Y), Neg(a.Z), Neg(a.W));
+            return new PointType(Neg(a.X), Neg(a.Y), Neg(a.Z), Neg(a.W));
         }
-        public static PointType<T> operator *(PointType<T> a, T b)
+        public static PointType operator *(PointType a, double b)
         {
-            return new PointType<T>(Mult(a.X, b), Mult(a.Y, b), Mult(a.Z, b), Mult(a.W, b));
+            return new PointType(Mult(a.X, b), Mult(a.Y, b), Mult(a.Z, b), Mult(a.W, b));
         }
-        public static PointType<T> operator /(PointType<T> a, T b)
+        public static PointType operator /(PointType a, double b)
         {
-            return new PointType<T>(Div(a.X, b), Div(a.Y, b), Div(a.Z, b), Div(a.W, b));
+            return new PointType(Div(a.X, b), Div(a.Y, b), Div(a.Z, b), Div(a.W, b));
         }
         #endregion
 
         #region Basic Operations
-        private static T Add(params T[] n)
+        private static double Add(params double[] n)
         {
             dynamic sum = 0;
-            foreach (T value in n)
+            foreach (double value in n)
             {
                 sum += value;
             }
             return sum;
         }
 
-        private static T Subs(params T[] n)
+        private static double Subs(params double[] n)
         {
             dynamic subs = n[0];
-            foreach (T value in n.Skip(1))
+            foreach (double value in n.Skip(1))
             {
                 subs -= value;
             }
             return subs;
         }
 
-        private static T Neg(T n1)
+        private static double Neg(double n1)
         {
             dynamic a = n1;
             return -a;
         }
 
-        private static T Mult(params T[] n)
+        private static double Mult(params double[] n)
         {
             dynamic mult = n[0];
-            foreach (T value in n.Skip(1))
+            foreach (double value in n.Skip(1))
             {
                 mult *= value;
             }
             return mult;
         }
 
-        private static T Div(T n1, T n2)
+        private static double Div(double n1, double n2)
         {
             dynamic a = n1;
             dynamic b = n2;
@@ -107,52 +97,34 @@ namespace RayTracerChallenge.Features
 
         #endregion
 
-        public static PointType<T> Point(T x, T y, T z)
-        {
-            var _one = TConverter.ChangeType<T>(1);
-            return new PointType<T>(x, y, z, _one);
-        }
-        public static PointType<T> Vector(T x, T y, T z)
-        {
-            var _zero = TConverter.ChangeType<T>(0);
-            return new PointType<T>(x, y, z, _zero);
-        }
+        public static PointType Point(double x, double y, double z)
+            => new PointType(x, y, z, 1);
+        public static PointType Vector(double x, double y, double z)
+            => new PointType(x, y, z, 0);
 
         public double Magnetude()
         {
             if (!IsVector) throw new Exception("You can only calculate the magnetude of a vector.");
 
-            dynamic x = X;
-            dynamic y = Y;
-            dynamic z = Z;
-            dynamic w = W;
-
-            return Math.Sqrt(x * x + y * y + z * z + w * w);
+            return Math.Sqrt(X * X + Y * Y + Z * Z + W * W);
         }
 
-        public PointType<T> Normalizing()
+        public PointType Normalizing()
         {
             var m = Magnetude();
 
-            dynamic x = X;
-            dynamic y = Y;
-            dynamic z = Z;
-            dynamic w = W;
-
-            var magn = TConverter.ChangeType<T>(m);
-
-            return new PointType<T>(
-                x / magn,
-                y / magn,
-                z / magn,
-                w / magn);
+            return new PointType(
+                X / m,
+                Y / m,
+                Z / m,
+                W / m);
         }
-        
-        public static T DotProduct(PointType<T> a, PointType<T> b)
+
+        public static double DotProduct(PointType a, PointType b)
         {
             return DotProductTuple(a.ToTuple(), b.ToTuple());
         }
-        public static PointType<T> CrossProduct(PointType<T> a, PointType<T> b)
+        public static PointType CrossProduct(PointType a, PointType b)
         {
             return Vector(Subs(Mult(a.Y, b.Z), Mult(a.Z, b.Y)),
                 Subs(Mult(a.Z, b.X), Mult(a.X, b.Z)),
@@ -160,62 +132,60 @@ namespace RayTracerChallenge.Features
         }
 
         #region Tuples Methods
-        public Tuple<T, T, T, T> ToTuple()
+        public Tuple<double, double, double, double> ToTuple()
         {
-            return new Tuple<T, T, T, T>(X, Y, Z, W);
+            return new Tuple<double, double, double, double>(X, Y, Z, W);
         }
-        public static Tuple<T, T, T, T> PointToTuple(T x, T y, T z)
+        public static Tuple<double, double, double, double> PointToTuple(double x, double y, double z)
         {
-            var _one = TConverter.ChangeType<T>(1);
-            return new Tuple<T, T, T, T>(x, y, z, _one);
+            return new Tuple<double, double, double, double>(x, y, z, 1);
         }
-        public static Tuple<T, T, T, T> VectorToTuple(T x, T y, T z)
+        public static Tuple<double, double, double, double> VectorToTuple(double x, double y, double z)
         {
-            var _zero = TConverter.ChangeType<T>(0);
-            return new Tuple<T, T, T, T>(x, y, z, _zero);
+            return new Tuple<double, double, double, double>(x, y, z, 0);
         }
 
-        public static Tuple<T, T, T, T> AddTuple(Tuple<T, T, T, T> a1, Tuple<T, T, T, T> a2)
+        public static Tuple<double, double, double, double> AddTuple(Tuple<double, double, double, double> a1, Tuple<double, double, double, double> a2)
         {
-            return new Tuple<T, T, T, T>(
+            return new Tuple<double, double, double, double>(
                 Add(a1.Item1, a2.Item1),
                 Add(a1.Item2, a2.Item2),
                 Add(a1.Item3, a2.Item3),
                 Add(a1.Item4, a2.Item4));
         }
-        public static Tuple<T, T, T, T> SubstractTuple(Tuple<T, T, T, T> a1, Tuple<T, T, T, T> a2)
+        public static Tuple<double, double, double, double> SubstractTuple(Tuple<double, double, double, double> a1, Tuple<double, double, double, double> a2)
         {
-            return new Tuple<T, T, T, T>(
+            return new Tuple<double, double, double, double>(
                 Subs(a1.Item1, a2.Item1),
                 Subs(a1.Item2, a2.Item2),
                 Subs(a1.Item3, a2.Item3),
                 Subs(a1.Item4, a2.Item4));
         }
-        public static Tuple<T, T, T, T> NegateTuple(Tuple<T, T, T, T> a1)
+        public static Tuple<double, double, double, double> NegateTuple(Tuple<double, double, double, double> a1)
         {
-            return new Tuple<T, T, T, T>(
+            return new Tuple<double, double, double, double>(
                 Neg(a1.Item1),
                 Neg(a1.Item2),
                 Neg(a1.Item3),
                 Neg(a1.Item4));
         }
-        public static Tuple<T, T, T, T> MultiplyTuple(Tuple<T, T, T, T> a1, T a2)
+        public static Tuple<double, double, double, double> MultiplyTuple(Tuple<double, double, double, double> a1, double a2)
         {
-            return new Tuple<T, T, T, T>(
+            return new Tuple<double, double, double, double>(
                 Mult(a1.Item1, a2),
                 Mult(a1.Item2, a2),
                 Mult(a1.Item3, a2),
                 Mult(a1.Item4, a2));
         }
-        public static Tuple<T, T, T, T> DivideTuple(Tuple<T, T, T, T> a1, T a2)
+        public static Tuple<double, double, double, double> DivideTuple(Tuple<double, double, double, double> a1, double a2)
         {
-            return new Tuple<T, T, T, T>(
+            return new Tuple<double, double, double, double>(
                 Div(a1.Item1, a2),
                 Div(a1.Item2, a2),
                 Div(a1.Item3, a2),
                 Div(a1.Item4, a2));
         }
-        public static T DotProductTuple(Tuple<T, T, T, T> a, Tuple<T, T, T, T> b)
+        public static double DotProductTuple(Tuple<double, double, double, double> a, Tuple<double, double, double, double> b)
         {
             return Add(Mult(a.Item1, b.Item1),
                        Mult(a.Item2, b.Item2),
@@ -237,19 +207,19 @@ namespace RayTracerChallenge.Features
         }
         public override bool Equals(object obj)
         {
-            var coords = obj as PointType<T>;
+            var coords = obj as PointType;
             return (X.CompareTo(coords.X) == 0) &&
                    (Y.CompareTo(coords.Y) == 0) &&
                    (Z.CompareTo(coords.Z) == 0) &&
                    (W.CompareTo(coords.W) == 0);
         }
-        public bool Equals(object obj, int precision)
+        public bool Equals(object obj, int p)
         {
-            var coords = obj as PointType<T>;
-            return (X.CompareTo(coords.X) == 0) &&
-                   (Y.CompareTo(coords.Y) == 0) &&
-                   (Z.CompareTo(coords.Z) == 0) &&
-                   (W.CompareTo(coords.W) == 0);
+            var coords = obj as PointType;
+            return Math.Round(X, p) == Math.Round(coords.X, p) &&
+                   Math.Round(Y, p) == Math.Round(coords.Y, p) &&
+                   Math.Round(Z, p) == Math.Round(coords.Z, p) &&
+                   Math.Round(W, p) == Math.Round(coords.W, p);
         }
         public override int GetHashCode()
         {

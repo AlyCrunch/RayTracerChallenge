@@ -45,22 +45,22 @@ namespace Visual.RTC
         {
             var canvas = new RTCf.Canvas(width, height, black);
 
-            var m = float.Parse(Magnetude.Text);
-            var vel = new Tuple<float, float, float>(
-                float.Parse(VelocityX.Text),
-                float.Parse(VelocityY.Text),
-                float.Parse(VelocityZ.Text));
+            var m = double.Parse(Magnetude.Text);
+            var vel = new Tuple<double, double, double>(
+                double.Parse(VelocityX.Text),
+                double.Parse(VelocityY.Text),
+                double.Parse(VelocityZ.Text));
 
-            var proj = new RTCh.Projectile<float>(
-                    RTCf.PointType<float>.Point(0, 1, 0),
-                    RTCf.PointType<float>.Vector(vel.Item1, vel.Item2, vel.Item3).Normalizing() * m);
-            var env = new RTCh.Environment<float>(
-                    RTCf.PointType<float>.Vector(0, -0.1f, 0),
-                    RTCf.PointType<float>.Vector(-0.01f, 0, 0));
+            var proj = new RTCh.Projectile(
+                    RTCf.PointType.Point(0, 1, 0),
+                    RTCf.PointType.Vector(vel.Item1, vel.Item2, vel.Item3).Normalizing() * m);
+            var env = new RTCh.Environment(
+                    RTCf.PointType.Vector(0, -0.1, 0),
+                    RTCf.PointType.Vector(-0.01, 0, 0));
 
             canvas.WritePixel((int)proj.Position.X, (height - 1) - (int)proj.Position.Y, red);
 
-            foreach (var coord in RTCh.Projectile<float>.GetTick(env, proj))
+            foreach (var coord in RTCh.Projectile.GetTick(env, proj))
             {
                 canvas.WritePixel((int)coord.X, (height - 1) - (int)coord.Y, red);
             }
