@@ -29,7 +29,7 @@
                     Grid.Column="0"/>
             <TextBlock x:Name="FolderPath" 
                        HorizontalAlignment="Stretch"
-                       Text="D:\Users\aliso\Desktop\prout" Grid.Column="1"/>
+                       Text="D:\Users\aliso\Desktop\test_RT" Grid.Column="1"/>
             <TextBlock Text="Filename" Grid.Column="2"/>
             <TextBox x:Name="FileName" Grid.Column="3" Text="test"/>
         </Grid>        

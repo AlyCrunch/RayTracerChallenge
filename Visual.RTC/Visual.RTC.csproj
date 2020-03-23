@@ -79,10 +79,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PIT04.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PIT02.xaml.cs">
       <DependentUpon>PIT02.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PIT04.xaml.cs">
+      <DependentUpon>PIT04.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

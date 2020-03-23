@@ -165,7 +165,7 @@ namespace RayTracerChallenge.Features
                     {
                         value += a[i, y] * b[x, i];
                     }
-                    m.Content[x, y] = value;
+                    m[x, y] = value;
                 }
             }
 

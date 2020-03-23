@@ -55,6 +55,7 @@
     <Compile Include="Features\Enums\Colors.cs" />
     <Compile Include="Features\Matrix.cs" />
     <Compile Include="Features\PointType.cs" />
+    <Compile Include="Features\Rays.cs" />
     <Compile Include="Helpers\Projectile.cs" />
     <Compile Include="Helpers\TConverter.cs" />
     <Compile Include="Helpers\ArrayExtension.cs" />

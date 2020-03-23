@@ -180,5 +180,54 @@ namespace Tests.RTC
             Assert.Equal(expected, transform * p);
         }
         #endregion
+
+        [Fact]
+        public void TransformationSequence()
+        {
+            var p = RTF.PointType.Point(1, 0, 1);
+            var a = RTH.Transformations.RotationX(Math.PI / 2);
+            var b = RTH.Transformations.Scaling(5, 5, 5);
+            var c = RTH.Transformations.Translation(10, 5, 7);
+
+            var p2 = a * p;
+            var expected1 = RTF.PointType.Point(1, -1, 0);
+            CustomAssert.Equal(expected1, p2, 0);
+
+            var p3 = b * p2;
+            var expected2 = RTF.PointType.Point(5, -5, 0);
+            CustomAssert.Equal(expected2, b * p2, 0);
+
+            var p4 = c * p3;
+            var expected3 = RTF.PointType.Point(15, 0, 7);
+            CustomAssert.Equal(expected3, p4, 0);
+        }
+        [Fact]
+        public void TransformationChained()
+        {
+            var p = RTF.PointType.Point(1, 0, 1);
+            var a = RTH.Transformations.RotationX(Math.PI / 2);
+            var b = RTH.Transformations.Scaling(5, 5, 5);
+            var c = RTH.Transformations.Translation(10, 5, 7);
+
+            var t = a * b * c;
+
+            var expected = RTF.PointType.Point(15, 0, 7);
+            CustomAssert.Equal(expected, t * p, 0);
+        }
+
+        [Fact]
+        public void TestPIT()
+        {
+            var twelve = RTF.PointType.Point(0, 0, 1);
+            var r = RTH.Transformations.RotationY(3 * (Math.PI / 6));
+            var r2 = RTH.Transformations.RotationY(6 * (Math.PI / 6));
+
+            var three = RTF.PointType.Point(1, 0, 0);
+            var six = RTF.PointType.Point(0, 0, -1);
+
+
+            CustomAssert.Equal(three, r * twelve, 0);
+            CustomAssert.Equal(six, r2 * twelve, 0);
+        }
     }
 }
