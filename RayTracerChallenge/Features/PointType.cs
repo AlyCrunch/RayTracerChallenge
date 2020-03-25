@@ -203,7 +203,7 @@ namespace RayTracerChallenge.Features
         public string ToCoordinates() => $"[{X},{Y},{Z}]";
         public override string ToString()
         {
-            return $"[{X.ToString()}, {Y.ToString()}, {Z.ToString()}, {W.ToString()}][{Type()}]";
+            return $"[{X}, {Y}, {Z}, {W}][{Type()}]";
         }
         public string ToString(string format)
         {
