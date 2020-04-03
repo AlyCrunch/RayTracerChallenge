@@ -54,11 +54,13 @@
     <Compile Include="Features\Comparer\MatrixEqualityComparer.cs" />
     <Compile Include="Features\Enums\Colors.cs" />
     <Compile Include="Features\Intersection.cs" />
+    <Compile Include="Features\Material.cs" />
     <Compile Include="Features\Matrix.cs" />
     <Compile Include="Features\PointType.cs" />
     <Compile Include="Features\Ray.cs" />
     <Compile Include="Features\Sphere.cs" />
     <Compile Include="Helpers\Projectile.cs" />
+    <Compile Include="Helpers\Light.cs" />
     <Compile Include="Helpers\TConverter.cs" />
     <Compile Include="Helpers\ArrayExtension.cs" />
     <Compile Include="Helpers\Transformations.cs" />

@@ -1,43 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using RTF = RayTracerChallenge.Features;
 using RTH = RayTracerChallenge.Helpers;
 
 namespace Visual.RTC
 {
     /// <summary>
-    /// Logique d'interaction pour PIT05.xaml
+    /// Logique d'interaction pour PIT06.xaml
     /// </summary>
-    public partial class PIT05 : Window
+    public partial class PIT06 : Window
     {
-        public PIT05()
+        public PIT06()
         {
             InitializeComponent();
         }
 
-        public RTF.Canvas DrawRedCircle(RTF.Sphere s)
+        public RTF.Canvas CreateCircle(RTF.Sphere s)
         {
+            var lightPos = RTF.PointType.Point(-10, 10, -10);
+            var light = new RTH.Light(lightPos, RTF.Color.White());
+
             var rayOrigin = RTF.PointType.Point(0, 0, -5);
             double wallZ = 10;
             double wallSize = 7;
             var canvasPixel = 100;
-            double pixelSize = (double)wallSize / (double)canvasPixel;
+            double pixelSize = wallSize / canvasPixel;
             double half = wallSize / 2;
 
-            var canvas = new RTF.Canvas(canvasPixel, canvasPixel, new RTF.Color(0, 0, 0));
-            var color = new RTF.Color(255, 0, 0);
+            var canvas = new RTF.Canvas(canvasPixel, canvasPixel, RTF.Color.Black());
+
             var shape = s;
+            shape.Material.Color = RTF.Color.Magenta();
 
             for (int y = 0; y < canvasPixel; y++)
             {
@@ -53,13 +46,25 @@ namespace Visual.RTC
                     var hit = RTF.Intersection.Hit(xs);
 
                     if (hit != null)
+                    {
+                        var point = RTH.Transformations.Position(r, hit.T);
+                        var normal = RTH.Light.NormalAt(hit.Object, point);
+                        var eye = -r.Direction;
+                        
+                        var color = RTH.Light.Lighting(
+                            (hit.Object as RTF.Sphere).Material,
+                            light,
+                            point,
+                            eye,
+                            normal);
+
                         canvas.WritePixel(x, y, color);
+                    }
                 }
             }
 
             return canvas;
         }
-
 
         private void SelectFolder_Click(object sender, RoutedEventArgs e)
         {
@@ -73,9 +78,9 @@ namespace Visual.RTC
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            var canvas = DrawRedCircle(new RTF.Sphere());
+            var canvas = CreateCircle(new RTF.Sphere());
 
-            canvas.SaveAsPPMFile(FolderPath.Text + "\\RaySphereIntersections.ppm");
+            canvas.SaveAsPPMFile(FolderPath.Text + "\\Light.ppm");
         }
 
         private void ShearingScalingButton_Click(object sender, RoutedEventArgs e)
@@ -84,9 +89,9 @@ namespace Visual.RTC
             {
                 Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.Shearing(1, 0, 0, 0, 0, 0)
             };
-            var canvas = DrawRedCircle(s);
+            var canvas = CreateCircle(s);
 
-            canvas.SaveAsPPMFile(FolderPath.Text + "\\RaySphereIntersections[Shearing Scaling].ppm");
+            canvas.SaveAsPPMFile(FolderPath.Text + "\\Light[Shearing Scaling].ppm");
         }
 
         private void RotationScalingButton_Click(object sender, RoutedEventArgs e)
@@ -95,9 +100,9 @@ namespace Visual.RTC
             {
                 Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.RotationZ(Math.PI / 4)
             };
-            var canvas = DrawRedCircle(s);
+            var canvas = CreateCircle(s);
 
-            canvas.SaveAsPPMFile(FolderPath.Text + "\\RaySphereIntersections[Rotation Scaling].ppm");
+            canvas.SaveAsPPMFile(FolderPath.Text + "\\Light[Rotation Scaling].ppm");
         }
 
         private void ScalingXButton_Click(object sender, RoutedEventArgs e)
@@ -106,9 +111,9 @@ namespace Visual.RTC
             {
                 Transform = RTH.Transformations.Scaling(0.5, 1, 1)
             };
-            var canvas = DrawRedCircle(s);
+            var canvas = CreateCircle(s);
 
-            canvas.SaveAsPPMFile(FolderPath.Text + "\\RaySphereIntersections[Scaling X].ppm");
+            canvas.SaveAsPPMFile(FolderPath.Text + "\\Light[Scaling X].ppm");
         }
 
         private void ScalingYButton_Click(object sender, RoutedEventArgs e)
@@ -117,9 +122,9 @@ namespace Visual.RTC
             {
                 Transform = RTH.Transformations.Scaling(1, 0.5, 1)
             };
-            var canvas = DrawRedCircle(s);
+            var canvas = CreateCircle(s);
 
-            canvas.SaveAsPPMFile(FolderPath.Text + "\\RaySphereIntersections[Scaling Y].ppm");
+            canvas.SaveAsPPMFile(FolderPath.Text + "\\Light[Scaling Y].ppm");
         }
     }
 }

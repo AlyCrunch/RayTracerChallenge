@@ -68,7 +68,7 @@ namespace RayTracerChallenge.Features
             {
                 List<string> line = new List<string>();
                 for (int x = 0; x < Width; x++)
-                    line.Add(Pixels[x, y].To255());
+                    line.Add(Pixels[x, y].To256());
 
                 ppm.Add(string.Join(" ", line));
             }

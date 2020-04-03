@@ -42,9 +42,9 @@ namespace Tests.RTC
                            "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255";
 
             var c = new RTF.Canvas(5, 3);
-            var c1 = new RTF.Color(1.5m, 0, 0);
-            var c2 = new RTF.Color(0, 0.5m, 0);
-            var c3 = new RTF.Color(-0.5m, 0, 1);
+            var c1 = new RTF.Color(1.5, 0, 0);
+            var c2 = new RTF.Color(0, 0.5, 0);
+            var c3 = new RTF.Color(-0.5, 0, 1);
 
             c.WritePixel(0, 0, c1);
             c.WritePixel(2, 1, c2);

@@ -25,5 +25,13 @@ namespace Tests.RTC.Helpers
                     string.Format(CultureInfo.CurrentCulture, "Actual : {0}", actual.ToString("F" + precision))
                 );
         }
+        public static void Equal(RayTracerChallenge.Features.Color expected, RayTracerChallenge.Features.Color actual, int precision)
+        {
+            if (!expected.Equals(actual, precision))
+                throw new EqualException(
+                    string.Format(CultureInfo.CurrentCulture, "Expected : {0}", expected.ToString("F" + precision)),
+                    string.Format(CultureInfo.CurrentCulture, "Actual : {0}", actual.ToString("F" + precision))
+                );
+        }
     }
 }

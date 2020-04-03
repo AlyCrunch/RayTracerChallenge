@@ -18,6 +18,7 @@ namespace Visual.RTC
                 case "Chapter2": new PIT02().Show(); break;
                 case "Chapter4": new PIT04().Show(); break;
                 case "Chapter5": new PIT05().Show(); break;
+                case "Chapter6": new PIT06().Show(); break;
                 default: return;
             }
         }

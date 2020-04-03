@@ -6,8 +6,7 @@ namespace Tests.RTC
 {
     public class Matrice
     {
-        RTF.Comparer.MatrixEqualityComparer comp = new RTF.Comparer.MatrixEqualityComparer();
-
+        
         [Fact]
         public void ConstructAndInspectMatrice4x4()
         {
