@@ -51,12 +51,14 @@
   <ItemGroup>
     <Compile Include="Features\Canvas.cs" />
     <Compile Include="Features\Color.cs" />
+    <Compile Include="Features\Computation.cs" />
     <Compile Include="Features\Intersection.cs" />
     <Compile Include="Features\Material.cs" />
     <Compile Include="Features\Matrix.cs" />
     <Compile Include="Features\PointType.cs" />
     <Compile Include="Features\Ray.cs" />
     <Compile Include="Features\Sphere.cs" />
+    <Compile Include="Features\World.cs" />
     <Compile Include="Helpers\Projectile.cs" />
     <Compile Include="Helpers\Light.cs" />
     <Compile Include="Helpers\TConverter.cs" />

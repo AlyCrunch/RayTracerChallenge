@@ -1,5 +1,6 @@
 ﻿using RayTracerChallenge.Features;
 using System;
+using System.Collections.Generic;
 
 namespace RayTracerChallenge.Helpers
 {
@@ -63,5 +64,22 @@ namespace RayTracerChallenge.Helpers
 
         public Color Lighting(Material material, PointType point, PointType eyeVector, PointType normalVector)
             => Lighting(material, this, point, eyeVector, normalVector);
+
+        #region Overriding
+        public override bool Equals(object obj)
+        {
+            return obj is Light light &&
+                   Position.Equals(light.Position) &&
+                   Intensity.Equals(light.Intensity);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 978863716;
+            hashCode = hashCode * -1521134295 + EqualityComparer<PointType>.Default.GetHashCode(Position);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Color>.Default.GetHashCode(Intensity);
+            return hashCode;
+        }
+        #endregion
     }
 }

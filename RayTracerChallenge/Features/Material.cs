@@ -19,6 +19,13 @@ namespace RayTracerChallenge.Features
             Shininess = 200;
         }
 
+        public Material(Color color, double diffuse, double specular)
+        {
+            Color = color;
+            Diffuse = diffuse;
+            Specular = specular;
+        }
+
         #region Overriding
         public override bool Equals(object obj)
         {

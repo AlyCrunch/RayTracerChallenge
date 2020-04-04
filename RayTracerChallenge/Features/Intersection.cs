@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RayTracerChallenge.Features
@@ -37,6 +38,16 @@ namespace RayTracerChallenge.Features
 
             return new Intersection[] 
             { new Intersection(t1, s), new Intersection(t2, s) };
+        }
+
+        public static Intersection[] Intersect(World w, Ray r)
+        {
+            var its = new List<Intersection>();
+
+            foreach (var obj in w.Objects)
+                its.AddRange(Intersect((Sphere)obj, r));
+
+            return its.OrderBy(x => x.T).ToArray();
         }
 
         public static Intersection Hit(Intersection[] intersections)
