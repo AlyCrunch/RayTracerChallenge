@@ -51,8 +51,6 @@
   <ItemGroup>
     <Compile Include="Features\Canvas.cs" />
     <Compile Include="Features\Color.cs" />
-    <Compile Include="Features\Comparer\MatrixEqualityComparer.cs" />
-    <Compile Include="Features\Enums\Colors.cs" />
     <Compile Include="Features\Intersection.cs" />
     <Compile Include="Features\Material.cs" />
     <Compile Include="Features\Matrix.cs" />
@@ -83,17 +81,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Shaders\shader.frag">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\shader.vert">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

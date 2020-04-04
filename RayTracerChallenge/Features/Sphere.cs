@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RayTracerChallenge.Features
+﻿namespace RayTracerChallenge.Features
 {
     public class Sphere
     {

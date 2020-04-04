@@ -1,8 +1,6 @@
-﻿using RTF = RayTracerChallenge.Features;
+﻿using Xunit;
+using RTF = RayTracerChallenge.Features;
 using RTH = RayTracerChallenge.Helpers;
-using System;
-using Xunit;
-using Tests.RTC.Helpers;
 
 namespace Tests.RTC
 {
