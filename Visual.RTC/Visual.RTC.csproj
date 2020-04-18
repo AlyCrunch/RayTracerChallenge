@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PIT07.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PIT06.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +105,9 @@
     </Compile>
     <Compile Include="PIT05.xaml.cs">
       <DependentUpon>PIT05.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PIT07.xaml.cs">
+      <DependentUpon>PIT07.xaml</DependentUpon>
     </Compile>
     <Compile Include="PIT06.xaml.cs">
       <DependentUpon>PIT06.xaml</DependentUpon>

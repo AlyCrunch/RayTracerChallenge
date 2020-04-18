@@ -24,6 +24,8 @@ namespace RayTracerChallenge.Features
             Color = color;
             Diffuse = diffuse;
             Specular = specular;
+            Ambient = 0.1;
+            Shininess = 200;
         }
 
         #region Overriding

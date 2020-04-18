@@ -27,6 +27,7 @@
             <Button x:Name="Chapter4" Content="Chapter 4" Click="Chapter_Click"/>
             <Button x:Name="Chapter5" Content="Chapter 5" Click="Chapter_Click"/>
             <Button x:Name="Chapter6" Content="Chapter 6" Click="Chapter_Click"/>
+            <Button x:Name="Chapter7" Content="Chapter 7" Click="Chapter_Click"/>
         </StackPanel>
         <StackPanel Grid.Column="1"
                     Orientation="Vertical"

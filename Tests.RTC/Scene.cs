@@ -163,7 +163,6 @@ namespace Tests.RTC
                       RTF.PointType.Vector(0, 0, 1));
             var c = w.ColorAt(r);
             var exp = new RTF.Color(0.38066, 0.47583, 0.2855);
-            //var exp = new RTF.Color(0.50066, 0.57583, 0.42550);
 
             CustomAssert.Equal(exp, c, 5);
         }
