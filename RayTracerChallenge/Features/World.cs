@@ -34,5 +34,31 @@ namespace RayTracerChallenge.Features
                 }
             };
         }
+
+        public static Color ShadeHit(World w, Computation comps)
+        {
+            return Light.Lighting(
+                (comps.Object as Sphere).Material,
+                w.Light,
+                comps.Point,
+                comps.EyeV,
+                comps.NormalV);
+        }
+
+        public Color ShadeHit(Computation comps)
+            => ShadeHit(this, comps);
+
+        public static Color ColorAt(World w, Ray r)
+        {
+            var inters = Intersection.Intersect(w, r);
+            var hit = Intersection.Hit(inters);
+
+            if (hit == null) return Color.Black();
+            var comps = Computation.PrepareComputation(hit, r);
+            return ShadeHit(w, comps);
+        }
+
+        public Color ColorAt(Ray r)
+            => ColorAt(this, r);
     }
 }

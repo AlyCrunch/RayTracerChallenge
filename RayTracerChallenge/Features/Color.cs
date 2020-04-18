@@ -98,9 +98,9 @@ namespace RayTracerChallenge.Features
         }
 
         public override string ToString()
-            => $"({Red},{Green},{Blue})";
+            => $"({Red}, {Green}, {Blue})";
         public string ToString(string format)
-            => $"({Red.ToString(format)},{Green.ToString(format)},{Blue.ToString(format)})";
+            => $"({Red.ToString(format)}, {Green.ToString(format)}, {Blue.ToString(format)})";
 
         public static bool operator ==(Color a, Color b)
             => a.Equals(b);

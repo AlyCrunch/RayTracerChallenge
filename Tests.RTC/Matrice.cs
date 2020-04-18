@@ -114,7 +114,7 @@ namespace Tests.RTC
             M2.SetRow(3, new double[] { 4, 8, 16, 32 });
 
             var M = M1 * M2;
-            Assert.Equal(31, M[0, 1]);
+            Assert.Equal(31, M[1,0]);
         }
         [Fact]
         public void MultiplyTuple()

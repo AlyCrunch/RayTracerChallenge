@@ -23,7 +23,7 @@ namespace RayTracerChallenge.Helpers
             worldPoint = Matrix.Transpose(s.Transform.Inverse()) * objectNormal;
             worldPoint.W = 0;
 
-            return worldPoint.Normalizing();
+            return worldPoint.Normalize();
         }
         public static PointType NormalAt(object s, PointType worldPoint)
         {
@@ -39,7 +39,7 @@ namespace RayTracerChallenge.Helpers
         public static Color Lighting(Material material, Light light, PointType point, PointType eyeVector, PointType normalVector)
         {
             var effectiveColor = material.Color * light.Intensity;
-            var lightVector = (light.Position - point).Normalizing();
+            var lightVector = (light.Position - point).Normalize();
 
             var ambient = effectiveColor * material.Ambient;
 

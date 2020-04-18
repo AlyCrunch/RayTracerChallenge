@@ -81,5 +81,20 @@ namespace RayTracerChallenge.Helpers
 
         public static PointType Position(Ray r, double t)
             => r.Origin + r.Direction * t;
+
+        public static Matrix ViewTransform(PointType from, PointType to, PointType up)
+        {
+            var forward = (to - from).Normalize();
+            var left = PointType.CrossProduct(forward, up.Normalize());
+            var trueUp = PointType.CrossProduct(left, forward);
+
+            var orientation = new Matrix(4, 4);
+            orientation.SetRow(0, new double[] { left.X, left.Y, left.Z, 0 });
+            orientation.SetRow(1, new double[] { trueUp.X, trueUp.Y, trueUp.Z, 0 });
+            orientation.SetRow(2, new double[] { -forward.X, -forward.Y, -forward.Z, 0 });
+            orientation.SetRow(3, new double[] { 0, 0, 0, 1 });
+            var t = Translation(-from.X, -from.Y, -from.Z);
+            return orientation * t;
+        }
     }
 }

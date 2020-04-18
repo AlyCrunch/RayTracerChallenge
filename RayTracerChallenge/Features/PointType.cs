@@ -109,7 +109,7 @@ namespace RayTracerChallenge.Features
             return Math.Sqrt(X * X + Y * Y + Z * Z + W * W);
         }
 
-        public PointType Normalizing()
+        public PointType Normalize()
         {
             var m = Magnetude();
 

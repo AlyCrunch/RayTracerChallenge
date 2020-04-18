@@ -209,7 +209,7 @@ namespace Tests.RTC
             var b = RTH.Transformations.Scaling(5, 5, 5);
             var c = RTH.Transformations.Translation(10, 5, 7);
 
-            var t = a * b * c;
+            var t = c * b * a;
 
             var expected = RTF.PointType.Point(15, 0, 7);
             CustomAssert.Equal(expected, t * p, 0);

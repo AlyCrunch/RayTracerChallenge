@@ -54,7 +54,7 @@ namespace Tests.RTC
             RTF.PointType n = RTH.Light.NormalAt
                 (s, RTF.PointType.Point(value, value, value));
 
-            Assert.Equal(n, n.Normalizing());
+            Assert.Equal(n, n.Normalize());
         }
 
         [Fact]
@@ -76,8 +76,7 @@ namespace Tests.RTC
         {
             var s = new RTF.Sphere
             {
-                Transform = RTH.Transformations.RotationZ(Math.PI / 5)
-                * RTH.Transformations.Scaling(1, 0.5, 1)
+                Transform = RTH.Transformations.Scaling(1, 0.5, 1) * RTH.Transformations.RotationZ(Math.PI / 5)
             };
 
             RTF.PointType n = RTH.Light.NormalAt

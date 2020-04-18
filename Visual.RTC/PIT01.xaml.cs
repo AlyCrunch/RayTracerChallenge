@@ -37,7 +37,7 @@ namespace Visual.RTC
 
             var proj = new RTH.Projectile(
                     PointType.Point(0, 1, 0),
-                    PointType.Vector(1, 1, 0).Normalizing() * inc);
+                    PointType.Vector(1, 1, 0).Normalize() * inc);
             var env = new RTH.Environment(
                     PointType.Vector(0, -0.1, 0),
                     PointType.Vector(-0.01, 0, 0));

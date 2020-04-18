@@ -193,7 +193,7 @@ namespace Tests.RTC
             var v1 = PointType.Vector(4, 0, 0);
             var expected = PointType.Vector(1, 0, 0);
 
-            Assert.Equal(expected, v1.Normalizing());
+            Assert.Equal(expected, v1.Normalize());
         }
         [Fact]
         public void NormalizingComplex()
@@ -201,7 +201,7 @@ namespace Tests.RTC
             var v1 = PointType.Vector(1, 2, 3);
             var expected = PointType.Vector(1 / Math.Sqrt(14), 2 / Math.Sqrt(14), 3 / Math.Sqrt(14));
 
-            Assert.Equal(expected, v1.Normalizing());
+            Assert.Equal(expected, v1.Normalize());
         }
 
         [Fact]

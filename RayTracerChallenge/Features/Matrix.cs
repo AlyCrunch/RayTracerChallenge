@@ -63,7 +63,7 @@ namespace RayTracerChallenge.Features
         public Matrix Transpose()
             => Transpose(this);
 
-        public static Matrix GetIdentity(int width, int height)
+        public static Matrix GetIdentity(int width = 4, int height = 4)
         {
             var m = new Matrix(width, height);
 
@@ -161,7 +161,7 @@ namespace RayTracerChallenge.Features
                     double value = 0;
                     for (int i = 0; i < a.Width; i++)
                     {
-                        value += a[i, y] * b[x, i];
+                        value += a[x, i] * b[i, y];
                     }
                     m[x, y] = value;
                 }

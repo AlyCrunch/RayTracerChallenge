@@ -53,7 +53,7 @@ namespace Visual.RTC
 
             var proj = new RTCh.Projectile(
                     RTCf.PointType.Point(0, 1, 0),
-                    RTCf.PointType.Vector(vel.Item1, vel.Item2, vel.Item3).Normalizing() * m);
+                    RTCf.PointType.Vector(vel.Item1, vel.Item2, vel.Item3).Normalize() * m);
             var env = new RTCh.Environment(
                     RTCf.PointType.Vector(0, -0.1, 0),
                     RTCf.PointType.Vector(-0.01, 0, 0));

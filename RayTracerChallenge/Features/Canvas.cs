@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace RayTracerChallenge.Features
@@ -76,6 +77,23 @@ namespace RayTracerChallenge.Features
         {
             File.WriteAllLines(path, CreatePPMHeader());
             File.AppendAllLines(path, CreatePPMCanvas());
+        }
+
+        public static Canvas Render(Camera camera, World world)
+        {
+            var image = new Canvas(camera.HorizontalSize, camera.VerticalSize);
+
+            for (int y = 0; y < camera.VerticalSize; y++)
+            {
+                for (int x = 0; x < camera.HorizontalSize; x++)
+                {
+                    var ray = camera.RayForPixel(x, y);
+                    var color = world.ColorAt(ray);
+                    image.WritePixel(x, y, color);
+                }
+            }
+
+            return image;
         }
     }
 }

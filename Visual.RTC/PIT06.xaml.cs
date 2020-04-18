@@ -40,7 +40,7 @@ namespace Visual.RTC
                     var worldX = -half + pixelSize * x;
                     var position = RTF.PointType.Point(worldX, worldY, wallZ);
 
-                    var r = new RTF.Ray(rayOrigin, (position - rayOrigin).Normalizing());
+                    var r = new RTF.Ray(rayOrigin, (position - rayOrigin).Normalize());
                     var xs = RTF.Intersection.Intersect(shape, r);
 
                     var hit = RTF.Intersection.Hit(xs);
