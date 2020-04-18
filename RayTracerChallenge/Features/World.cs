@@ -37,12 +37,14 @@ namespace RayTracerChallenge.Features
 
         public static Color ShadeHit(World w, Computation comps)
         {
+            var shadowed = Light.IsShadowed(w, comps.OverPoint);
             return Light.Lighting(
                 (comps.Object as Sphere).Material,
                 w.Light,
                 comps.Point,
                 comps.EyeV,
-                comps.NormalV);
+                comps.NormalV, 
+                shadowed);
         }
 
         public Color ShadeHit(Computation comps)

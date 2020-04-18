@@ -51,16 +51,16 @@ namespace Visual.RTC
                 double.Parse(VelocityY.Text),
                 double.Parse(VelocityZ.Text));
 
-            var proj = new RTCh.Projectile(
+            var proj = new RTCf.Projectile(
                     RTCf.PointType.Point(0, 1, 0),
                     RTCf.PointType.Vector(vel.Item1, vel.Item2, vel.Item3).Normalize() * m);
-            var env = new RTCh.Environment(
+            var env = new RTCf.Environment(
                     RTCf.PointType.Vector(0, -0.1, 0),
                     RTCf.PointType.Vector(-0.01, 0, 0));
 
             canvas.WritePixel((int)proj.Position.X, (height - 1) - (int)proj.Position.Y, red);
 
-            foreach (var coord in RTCh.Projectile.GetTick(env, proj))
+            foreach (var coord in RTCf.Projectile.GetTick(env, proj))
             {
                 canvas.WritePixel((int)coord.X, (height - 1) - (int)coord.Y, red);
             }

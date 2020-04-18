@@ -19,7 +19,7 @@ namespace Tests.RTC
         [Fact]
         public void TheDefaultWorld()
         {
-            var light = new RTH.Light(
+            var light = new RTF.Light(
                 RTF.PointType.Point(-10, 10, -10),
                 RTF.Color.White());
 
@@ -125,7 +125,7 @@ namespace Tests.RTC
         public void ShadingIntersectionFromInside()
         {
             var w = RTF.World.Default();
-            w.Light = new RTH.Light(
+            w.Light = new RTF.Light(
                       RTF.PointType.Point(0, 0.25, 0),
                       RTF.Color.White());
             var r = new RTF.Ray(

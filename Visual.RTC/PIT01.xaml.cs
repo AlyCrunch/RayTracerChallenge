@@ -35,14 +35,14 @@ namespace Visual.RTC
         {
             DrawCanvas.Children.Clear();
 
-            var proj = new RTH.Projectile(
+            var proj = new Projectile(
                     PointType.Point(0, 1, 0),
                     PointType.Vector(1, 1, 0).Normalize() * inc);
-            var env = new RTH.Environment(
+            var env = new RayTracerChallenge.Features.Environment(
                     PointType.Vector(0, -0.1, 0),
                     PointType.Vector(-0.01, 0, 0));
 
-            foreach (var coord in RTH.Projectile.GetTick(env, proj))
+            foreach (var coord in Projectile.GetTick(env, proj))
                 DrawCircle(coord.X, coord.Y);
         }
 

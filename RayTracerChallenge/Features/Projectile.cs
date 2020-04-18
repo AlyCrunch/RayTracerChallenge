@@ -1,7 +1,7 @@
 ﻿using RayTracerChallenge.Features;
 using System.Collections.Generic;
 
-namespace RayTracerChallenge.Helpers
+namespace RayTracerChallenge.Features
 {
     public class Projectile
     {

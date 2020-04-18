@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RayTracerChallenge.Helpers
+namespace RayTracerChallenge.Features
 {
     public class Light
     {
@@ -36,7 +36,23 @@ namespace RayTracerChallenge.Helpers
         public static PointType Reflect(PointType vector, PointType normal)
             => vector - normal * 2 * PointType.DotProduct(vector, normal);
 
-        public static Color Lighting(Material material, Light light, PointType point, PointType eyeVector, PointType normalVector)
+        public static bool IsShadowed(World world, PointType point)
+        {
+            var v = world.Light.Position - point;
+            var distance = v.Magnetude();
+            var direction = v.Normalize();
+
+            var r = new Ray(point, direction);
+            var intersections = Intersection.Intersect(world, r);
+
+            var h = Intersection.Hit(intersections);
+            if (!(h is null) && h.T < distance)
+                return true;
+            else
+                return false;
+        }
+
+        public static Color Lighting(Material material, Light light, PointType point, PointType eyeVector, PointType normalVector, bool inShadow)
         {
             var effectiveColor = material.Color * light.Intensity;
             var lightVector = (light.Position - point).Normalize();
@@ -59,11 +75,11 @@ namespace RayTracerChallenge.Helpers
                     specular = light.Intensity * material.Specular * factor;
                 }
             }
-            return ambient + diffuse + specular;
+            return ambient + ((!inShadow) ? diffuse + specular : Color.Black());
         }
 
         public Color Lighting(Material material, PointType point, PointType eyeVector, PointType normalVector)
-            => Lighting(material, this, point, eyeVector, normalVector);
+            => Lighting(material, this, point, eyeVector, normalVector, false);
 
         #region Overriding
         public override bool Equals(object obj)

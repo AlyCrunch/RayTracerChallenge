@@ -12,7 +12,7 @@ namespace Tests.RTC
         public void NormalSpherePointX()
         {
             var s = new RTF.Sphere();
-            RTF.PointType n = RTH.Light.NormalAt
+            RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(1, 0, 0));
             var e = RTF.PointType.Vector(1, 0, 0);
             Assert.Equal(e, n);
@@ -21,7 +21,7 @@ namespace Tests.RTC
         public void NormalSpherePointY()
         {
             var s = new RTF.Sphere();
-            RTF.PointType n = RTH.Light.NormalAt
+            RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(0, 1, 0));
             var e = RTF.PointType.Vector(0, 1, 0);
             Assert.Equal(e, n);
@@ -30,7 +30,7 @@ namespace Tests.RTC
         public void NormalSpherePointZ()
         {
             var s = new RTF.Sphere();
-            RTF.PointType n = RTH.Light.NormalAt
+            RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(0, 0, 1));
             var e = RTF.PointType.Vector(0, 0, 1);
             Assert.Equal(e, n);
@@ -40,7 +40,7 @@ namespace Tests.RTC
         {
             var s = new RTF.Sphere();
             double value = Math.Sqrt(3) / 3;
-            RTF.PointType n = RTH.Light.NormalAt
+            RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(value, value, value));
             var e = RTF.PointType.Vector(value, value, value);
             Assert.Equal(e, n);
@@ -51,7 +51,7 @@ namespace Tests.RTC
             var s = new RTF.Sphere();
             double value = Math.Sqrt(3) / 3;
 
-            RTF.PointType n = RTH.Light.NormalAt
+            RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(value, value, value));
 
             Assert.Equal(n, n.Normalize());
@@ -65,7 +65,7 @@ namespace Tests.RTC
                 Transform = RTH.Transformations.Translation(0, 1, 0)
             };
 
-            RTF.PointType n = RTH.Light.NormalAt
+            RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(0, 1.70711, -0.70711));
             var e = RTF.PointType.Vector(0, 0.70711, -0.70711);
 
@@ -79,7 +79,7 @@ namespace Tests.RTC
                 Transform = RTH.Transformations.Scaling(1, 0.5, 1) * RTH.Transformations.RotationZ(Math.PI / 5)
             };
 
-            RTF.PointType n = RTH.Light.NormalAt
+            RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(0, Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2));
             var e = RTF.PointType.Vector(0, 0.97014, -0.24254);
 
@@ -92,7 +92,7 @@ namespace Tests.RTC
             var v = RTF.PointType.Vector(1, -1, 0);
             var n = RTF.PointType.Vector(0, 1, 0);
 
-            RTF.PointType r = RTH.Light.Reflect(v, n);
+            RTF.PointType r = RTF.Light.Reflect(v, n);
 
             var e = RTF.PointType.Vector(1, 1, 0);
             Assert.Equal(e, r);
@@ -103,7 +103,7 @@ namespace Tests.RTC
             var v = RTF.PointType.Vector(0, -1, 0);
             var n = RTF.PointType.Vector(Math.Sqrt(2) / 2, Math.Sqrt(2) / 2, 0);
 
-            RTF.PointType r = RTH.Light.Reflect(v, n);
+            RTF.PointType r = RTF.Light.Reflect(v, n);
 
             var e = RTF.PointType.Vector(1, 0, 0);
             CustomAssert.Equal(e, r, 5);
@@ -114,7 +114,7 @@ namespace Tests.RTC
         {
             var intensity = new RTF.Color(1, 1, 1);
             var position = RTF.PointType.Point(0, 0, 0);
-            var light = new RTH.Light(position, intensity);
+            var light = new RTF.Light(position, intensity);
 
             Assert.Equal(position, light.Position);
             Assert.Equal(intensity, light.Intensity);
@@ -162,11 +162,11 @@ namespace Tests.RTC
             var eyeVector = RTF.PointType.Vector(0, 0, -1);
             var normalVector = RTF.PointType.Vector(0, 0, -1);
 
-            var light = new RTH.Light
+            var light = new RTF.Light
                 (RTF.PointType.Point(0, 0, -10), new RTF.Color(1, 1, 1));
-            var result = RTH.Light.Lighting(m, light, position, eyeVector, normalVector);
+            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
 
-            Assert.Equal(new RTF.Color(1.9, 1.9, 1.9), result);
+            CustomAssert.Equal(new RTF.Color(1.9, 1.9, 1.9), result, 5);
 
         }
         [Fact]
@@ -178,9 +178,9 @@ namespace Tests.RTC
             var eyeVector = RTF.PointType.Vector(0, Math.Sqrt(2)/2, -Math.Sqrt(2) / 2);
             var normalVector = RTF.PointType.Vector(0, 0, -1);
 
-            var light = new RTH.Light
+            var light = new RTF.Light
                 (RTF.PointType.Point(0, 0, -10), new RTF.Color(1, 1, 1));
-            var result = RTH.Light.Lighting(m, light, position, eyeVector, normalVector);
+            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
             
             Assert.Equal(new RTF.Color(1, 1, 1), result);
 
@@ -194,9 +194,9 @@ namespace Tests.RTC
             var eyeVector = RTF.PointType.Vector(0, 0, -1);
             var normalVector = RTF.PointType.Vector(0, 0, -1);
 
-            var light = new RTH.Light
+            var light = new RTF.Light
                 (RTF.PointType.Point(0, 10, -10), new RTF.Color(1, 1, 1));
-            var result = RTH.Light.Lighting(m, light, position, eyeVector, normalVector);
+            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
 
             CustomAssert.Equal(new RTF.Color(0.7364, 0.7364, 0.7364), result, 4);
         }
@@ -209,9 +209,9 @@ namespace Tests.RTC
             var eyeVector = RTF.PointType.Vector(0, -Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2);
             var normalVector = RTF.PointType.Vector(0, 0, -1);
 
-            var light = new RTH.Light
+            var light = new RTF.Light
                 (RTF.PointType.Point(0, 10, -10), new RTF.Color(1, 1, 1));
-            var result = RTH.Light.Lighting(m, light, position, eyeVector, normalVector);
+            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
 
             CustomAssert.Equal(new RTF.Color(1.6364, 1.6364, 1.6364), result, 4);
         }
@@ -224,9 +224,9 @@ namespace Tests.RTC
             var eyeVector = RTF.PointType.Vector(0, 0, -1);
             var normalVector = RTF.PointType.Vector(0, 0, -1);
 
-            var light = new RTH.Light
+            var light = new RTF.Light
                 (RTF.PointType.Point(0, 0, 10), new RTF.Color(1, 1, 1));
-            var result = RTH.Light.Lighting(m, light, position, eyeVector, normalVector);
+            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
 
             Assert.Equal(new RTF.Color(0.1, 0.1, 0.1), result);
         }

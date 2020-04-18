@@ -18,7 +18,7 @@ namespace Visual.RTC
         public RTF.Canvas CreateCircle(RTF.Sphere s)
         {
             var lightPos = RTF.PointType.Point(-10, 10, -10);
-            var light = new RTH.Light(lightPos, RTF.Color.White());
+            var light = new RTF.Light(lightPos, RTF.Color.White());
 
             var rayOrigin = RTF.PointType.Point(0, 0, -5);
             double wallZ = 10;
@@ -48,15 +48,16 @@ namespace Visual.RTC
                     if (hit != null)
                     {
                         var point = RTH.Transformations.Position(r, hit.T);
-                        var normal = RTH.Light.NormalAt(hit.Object, point);
+                        var normal = RTF.Light.NormalAt(hit.Object, point);
                         var eye = -r.Direction;
                         
-                        var color = RTH.Light.Lighting(
+                        var color = RTF.Light.Lighting(
                             (hit.Object as RTF.Sphere).Material,
                             light,
                             point,
                             eye,
-                            normal);
+                            normal,
+                            false);
 
                         canvas.WritePixel(x, y, color);
                     }
