@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RayTracerChallenge.Features
+namespace RayTracerChallenge.Features.Shapes
 {
     public class Sphere
     {

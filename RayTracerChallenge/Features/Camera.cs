@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RTH = RayTracerChallenge.Helpers;
 
 namespace RayTracerChallenge.Features
 {
@@ -52,7 +47,7 @@ namespace RayTracerChallenge.Features
             var worldX = HalfWidth - xOffset;
             var worldY = HalfHeight - yOffset;
 
-            var pixel = Transform.Inverse() 
+            var pixel = Transform.Inverse()
                 * PointType.Point(worldX, worldY, -1);
             var origin = Transform.Inverse()
                 * PointType.Point(0, 0, 0);

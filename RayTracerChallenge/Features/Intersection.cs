@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RayTracerChallenge.Features.Shapes;
 
 namespace RayTracerChallenge.Features
 {

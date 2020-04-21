@@ -1,7 +1,7 @@
-﻿using RayTracerChallenge.Features;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using RayTracerChallenge.Features;
 
-namespace RayTracerChallenge.Features
+namespace Visual.RTC.Objects
 {
     public class Projectile
     {

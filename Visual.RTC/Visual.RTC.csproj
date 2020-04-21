@@ -68,6 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Objects\Projectile.cs" />
     <Compile Include="PIT01.xaml.cs">
       <DependentUpon>PIT01.xaml</DependentUpon>
     </Compile>

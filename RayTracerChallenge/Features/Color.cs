@@ -43,7 +43,7 @@ namespace RayTracerChallenge.Features
             => new Color(a.Red - b.Red, a.Green - b.Green, a.Blue - b.Blue);
         public static Color operator *(Color a, int s)
             => new Color(a.Red * s, a.Green * s, a.Blue * s);
-        
+
         #region Colors
         public static Color Black() => new Color(0, 0, 0);
         public static Color White() => new Color(1, 1, 1);

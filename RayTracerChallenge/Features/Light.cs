@@ -1,4 +1,4 @@
-﻿using RayTracerChallenge.Features;
+﻿using RayTracerChallenge.Features.Shapes;
 using System;
 using System.Collections.Generic;
 

@@ -1,4 +1,5 @@
 ﻿using RayTracerChallenge.Features;
+using RayTracerChallenge.Features.Shapes;
 using System;
 
 namespace RayTracerChallenge.Helpers

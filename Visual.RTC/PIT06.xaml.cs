@@ -15,7 +15,7 @@ namespace Visual.RTC
             InitializeComponent();
         }
 
-        public RTF.Canvas CreateCircle(RTF.Sphere s)
+        public RTF.Canvas CreateCircle(RTF.Shapes.Sphere s)
         {
             var lightPos = RTF.PointType.Point(-10, 10, -10);
             var light = new RTF.Light(lightPos, RTF.Color.White());
@@ -52,7 +52,7 @@ namespace Visual.RTC
                         var eye = -r.Direction;
                         
                         var color = RTF.Light.Lighting(
-                            (hit.Object as RTF.Sphere).Material,
+                            (hit.Object as RTF.Shapes.Sphere).Material,
                             light,
                             point,
                             eye,
@@ -79,14 +79,14 @@ namespace Visual.RTC
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            var canvas = CreateCircle(new RTF.Sphere());
+            var canvas = CreateCircle(new RTF.Shapes.Sphere());
 
             canvas.SaveAsPPMFile(FolderPath.Text + "\\Light.ppm");
         }
 
         private void ShearingScalingButton_Click(object sender, RoutedEventArgs e)
         {
-            var s = new RTF.Sphere
+            var s = new RTF.Shapes.Sphere
             {
                 Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.Shearing(1, 0, 0, 0, 0, 0)
             };
@@ -97,7 +97,7 @@ namespace Visual.RTC
 
         private void RotationScalingButton_Click(object sender, RoutedEventArgs e)
         {
-            var s = new RTF.Sphere
+            var s = new RTF.Shapes.Sphere
             {
                 Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.RotationZ(Math.PI / 4)
             };
@@ -108,7 +108,7 @@ namespace Visual.RTC
 
         private void ScalingXButton_Click(object sender, RoutedEventArgs e)
         {
-            var s = new RTF.Sphere
+            var s = new RTF.Shapes.Sphere
             {
                 Transform = RTH.Transformations.Scaling(0.5, 1, 1)
             };
@@ -119,7 +119,7 @@ namespace Visual.RTC
 
         private void ScalingYButton_Click(object sender, RoutedEventArgs e)
         {
-            var s = new RTF.Sphere
+            var s = new RTF.Shapes.Sphere
             {
                 Transform = RTH.Transformations.Scaling(1, 0.5, 1)
             };

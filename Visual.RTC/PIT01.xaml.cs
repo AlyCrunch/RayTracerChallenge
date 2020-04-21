@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RayTracerChallenge.Features;
+using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using media = System.Windows.Media;
 using System.Windows.Shapes;
-using RayTracerChallenge.Features;
-using System.Text.RegularExpressions;
+using obj = Visual.RTC.Objects;
 using ctr = System.Windows.Controls;
-using RTH = RayTracerChallenge.Helpers;
+using media = System.Windows.Media;
 
 namespace Visual.RTC
 {
@@ -35,14 +34,14 @@ namespace Visual.RTC
         {
             DrawCanvas.Children.Clear();
 
-            var proj = new Projectile(
+            var proj = new obj.Projectile(
                     PointType.Point(0, 1, 0),
                     PointType.Vector(1, 1, 0).Normalize() * inc);
-            var env = new RayTracerChallenge.Features.Environment(
+            var env = new obj.Environment(
                     PointType.Vector(0, -0.1, 0),
                     PointType.Vector(-0.01, 0, 0));
 
-            foreach (var coord in Projectile.GetTick(env, proj))
+            foreach (var coord in obj.Projectile.GetTick(env, proj))
                 DrawCircle(coord.X, coord.Y);
         }
 
@@ -69,7 +68,7 @@ namespace Visual.RTC
             ctr.Canvas.SetLeft(circle, X * 10);
             DrawCanvas.Children.Add(circle);
         }
-        
+
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");

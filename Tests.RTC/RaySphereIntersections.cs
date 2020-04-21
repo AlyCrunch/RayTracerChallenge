@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using RTF = RayTracerChallenge.Features;
 using RTH = RayTracerChallenge.Helpers;
+using RayTracerChallenge.Features.Shapes;
 
 namespace Tests.RTC
 {
@@ -41,7 +42,7 @@ namespace Tests.RTC
             var origin = RTF.PointType.Point(0, 0, -5);
             var direction = RTF.PointType.Vector(0, 0, 1);
             var r = new RTF.Ray(origin, direction);
-            var s = new RTF.Sphere();
+            var s = new Sphere();
 
             var xs = RTH.Transformations.Intersect(s, r);
 
@@ -55,7 +56,7 @@ namespace Tests.RTC
             var origin = RTF.PointType.Point(0, 1, -5);
             var direction = RTF.PointType.Vector(0, 0, 1);
             var r = new RTF.Ray(origin, direction);
-            var s = new RTF.Sphere();
+            var s = new Sphere();
 
             var xs = RTH.Transformations.Intersect(s, r);
 
@@ -69,7 +70,7 @@ namespace Tests.RTC
             var origin = RTF.PointType.Point(0, 2, -5);
             var direction = RTF.PointType.Vector(0, 0, 1);
             var r = new RTF.Ray(origin, direction);
-            var s = new RTF.Sphere();
+            var s = new Sphere();
 
             var xs = RTH.Transformations.Intersect(s, r);
 
@@ -81,7 +82,7 @@ namespace Tests.RTC
             var origin = RTF.PointType.Point(0, 0, 0);
             var direction = RTF.PointType.Vector(0, 0, 1);
             var r = new RTF.Ray(origin, direction);
-            var s = new RTF.Sphere();
+            var s = new Sphere();
 
             var xs = RTH.Transformations.Intersect(s, r);
 
@@ -95,7 +96,7 @@ namespace Tests.RTC
             var origin = RTF.PointType.Point(0, 0, 5);
             var direction = RTF.PointType.Vector(0, 0, 1);
             var r = new RTF.Ray(origin, direction);
-            var s = new RTF.Sphere();
+            var s = new Sphere();
 
             var xs = RTH.Transformations.Intersect(s, r);
 
@@ -107,7 +108,7 @@ namespace Tests.RTC
         [Fact]
         public void IntersectionEncapsulatesTAndObject()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var i = new RTF.Intersection(3.5, s);
 
             Assert.Equal(3.5, i.T);
@@ -116,7 +117,7 @@ namespace Tests.RTC
         [Fact]
         public void AggregatingIntersections()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var i1 = new RTF.Intersection(1, s);
             var i2 = new RTF.Intersection(2, s);
 
@@ -131,7 +132,7 @@ namespace Tests.RTC
         {
             var r = new RTF.Ray(RTF.PointType.Point(0, 0, -5),
                 RTF.PointType.Vector(0, 0, 1));
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var xs = RTF.Intersection.Intersect(s, r);
 
             Assert.Equal(2, xs.Length);
@@ -142,7 +143,7 @@ namespace Tests.RTC
         [Fact]
         public void HitAllIntersectionPositiveT()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var i1 = new RTF.Intersection(1, s);
             var i2 = new RTF.Intersection(2, s);
             var xs = RTF.Intersection.Intersections(i2, i1);
@@ -154,7 +155,7 @@ namespace Tests.RTC
         [Fact]
         public void HitSomeIntersectionNegativeT()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var i1 = new RTF.Intersection(-1, s);
             var i2 = new RTF.Intersection(1, s);
             var xs = RTF.Intersection.Intersections(i2, i1);
@@ -166,7 +167,7 @@ namespace Tests.RTC
         [Fact]
         public void HitAllIntersectionNegativeT()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var i1 = new RTF.Intersection(-2, s);
             var i2 = new RTF.Intersection(-1, s);
             var xs = RTF.Intersection.Intersections(i2, i1);
@@ -178,7 +179,7 @@ namespace Tests.RTC
         [Fact]
         public void HitAlwaysLowestNonNegativeIntersec()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var i1 = new RTF.Intersection(5, s);
             var i2 = new RTF.Intersection(7, s);
             var i3 = new RTF.Intersection(-3, s);
@@ -217,13 +218,13 @@ namespace Tests.RTC
         [Fact]
         public void SphereDefaultTransformation()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             Assert.Equal(RTF.Matrix.GetIdentity(4, 4), s.Transform);
         }
         [Fact]
         public void ChangingSphereTransformation()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var t = RTH.Transformations.Translation(2, 3, 4);
             s.Transform = t;
 
@@ -232,7 +233,7 @@ namespace Tests.RTC
         [Fact]
         public void IntersectingScaledSphereWithRay()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var r = new RTF.Ray(RTF.PointType.Point(0, 0, -5),
                                 RTF.PointType.Vector(0, 0, 1));
 
@@ -246,7 +247,7 @@ namespace Tests.RTC
         [Fact]
         public void IntersectTranslatedSphereWithRay()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var r = new RTF.Ray(RTF.PointType.Point(0, 0, -5),
                                 RTF.PointType.Vector(0, 0, 1));
             s.Transform = RTH.Transformations.Translation(5, 0, 0);

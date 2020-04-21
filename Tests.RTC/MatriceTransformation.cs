@@ -225,7 +225,6 @@ namespace Tests.RTC
             var three = RTF.PointType.Point(1, 0, 0);
             var six = RTF.PointType.Point(0, 0, -1);
 
-
             CustomAssert.Equal(three, r * twelve, 0);
             CustomAssert.Equal(six, r2 * twelve, 0);
         }

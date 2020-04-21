@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RTF = RayTracerChallenge.Features;
-using RTH = RayTracerChallenge.Helpers;
+﻿using RTF = RayTracerChallenge.Features;
+using RayTracerChallenge.Features.Shapes;
 using t = RayTracerChallenge.Helpers.Transformations;
 using p = RayTracerChallenge.Features.PointType;
 using Xunit;
@@ -72,10 +69,10 @@ namespace Tests.RTC
                 Light = new RTF.Light(p.Point(0, 0, -10), RTF.Color.White())
             };
 
-            var s1 = new RTF.Sphere();
+            var s1 = new Sphere();
             w.Objects.Add(s1);
 
-            var s2 = new RTF.Sphere(t.Translation(0,0,10));
+            var s2 = new Sphere(t.Translation(0,0,10));
             w.Objects.Add(s2);
 
             var r = new RTF.Ray(p.Point(0, 0, 5), p.Vector(0, 0, 1));
@@ -92,7 +89,7 @@ namespace Tests.RTC
         {
             var r = new RTF.Ray(p.Point(0, 0, -5), p.Vector(0, 0, 1));
 
-            var shape = new RTF.Sphere(t.Translation(0, 0, 1));
+            var shape = new Sphere(t.Translation(0, 0, 1));
             var i = new RTF.Intersection(5, shape);
 
             var comps = RTF.Computation.PrepareComputation(i, r);

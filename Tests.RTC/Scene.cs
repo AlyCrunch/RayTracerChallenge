@@ -1,5 +1,6 @@
 ﻿using System;
 using RTF = RayTracerChallenge.Features;
+using RayTracerChallenge.Features.Shapes;
 using RTH = RayTracerChallenge.Helpers;
 using Tests.RTC.Helpers;
 using Xunit;
@@ -23,14 +24,14 @@ namespace Tests.RTC
                 RTF.PointType.Point(-10, 10, -10),
                 RTF.Color.White());
 
-            var s1 = new RTF.Sphere(
+            var s1 = new Sphere(
                         new RTF.Material(
                             new RTF.Color(0.8, 1, 0.6),
                             0.7,
                             0.2
                         )
                     );
-            var s2 = new RTF.Sphere(
+            var s2 = new Sphere(
                     RTH.Transformations.Scaling(0.5, 0.5, 0.5)
                 );
 
@@ -63,7 +64,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(
                    RTF.PointType.Point(0, 0, -5),
                    RTF.PointType.Vector(0, 0, 1));
-            var shape = new RTF.Sphere();
+            var shape = new Sphere();
             var i = new RTF.Intersection(4, shape);
             var comps = RTF.Computation.PrepareComputation(i, r);
 
@@ -80,7 +81,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(
                    RTF.PointType.Point(0, 0, -5),
                    RTF.PointType.Vector(0, 0, 1));
-            var shape = new RTF.Sphere();
+            var shape = new Sphere();
             var i = new RTF.Intersection(4, shape);
             var comps = RTF.Computation.PrepareComputation(i, r);
 
@@ -93,7 +94,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(
                    RTF.PointType.Point(0, 0, 0),
                    RTF.PointType.Vector(0, 0, 1));
-            var shape = new RTF.Sphere();
+            var shape = new Sphere();
             var i = new RTF.Intersection(1, shape);
             var comps = RTF.Computation.PrepareComputation(i, r);
 
@@ -171,9 +172,9 @@ namespace Tests.RTC
         public void ColorWithIntersecBehindRay()
         {
             var w = RTF.World.Default();
-            RTF.Sphere outer = (RTF.Sphere)w.Objects[0];
+            Sphere outer = (Sphere)w.Objects[0];
             outer.Material.Ambient = 1;
-            RTF.Sphere inner = (RTF.Sphere)w.Objects[1];
+            Sphere inner = (Sphere)w.Objects[1];
             inner.Material.Ambient = 1;
             var r = new RTF.Ray(
                       RTF.PointType.Point(0, 0, 0.75),

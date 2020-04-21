@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using RTF = RayTracerChallenge.Features;
-using RTH = RayTracerChallenge.Helpers;
-using transform = RayTracerChallenge.Helpers.Transformations;
 using point = RayTracerChallenge.Features.PointType;
+using RTF = RayTracerChallenge.Features;
+using transform = RayTracerChallenge.Helpers.Transformations;
 
 namespace Visual.RTC
 {
@@ -20,7 +19,7 @@ namespace Visual.RTC
 
         public RTF.Canvas CreateCircle()
         {
-            var floor = new RTF.Sphere()
+            var floor = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Scaling(10, 0.01, 10),
                 Material = new RTF.Material()
@@ -30,7 +29,7 @@ namespace Visual.RTC
                 }
             };
 
-            var leftWall = new RTF.Sphere()
+            var leftWall = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(0, 0, 5)
                             * transform.RotationY(-Math.PI / 4)
@@ -39,7 +38,7 @@ namespace Visual.RTC
                 Material = floor.Material
             };
 
-            var rightWall = new RTF.Sphere()
+            var rightWall = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(0, 0, 5)
                             * transform.RotationY(Math.PI / 4)
@@ -48,19 +47,19 @@ namespace Visual.RTC
                 Material = floor.Material
             };
 
-            var middle = new RTF.Sphere()
+            var middle = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(-0.5, 1, 0.5),
                 Material = new RTF.Material(new RTF.Color(0.1, 1, 0.5), 0.7, 0.3)
             };
 
-            var right = new RTF.Sphere()
+            var right = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(1.5, 0.5, -0.5) * transform.Scaling(0.5, 0.5, 0.5),
                 Material = new RTF.Material(new RTF.Color(0.5, 1, 0.1), 0.7, 0.3)
             };
 
-            var left = new RTF.Sphere()
+            var left = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(-1.5, 0.33, -0.75) * transform.Scaling(0.33, 0.33, 0.33),
                 Material = new RTF.Material(new RTF.Color(1, 0.8, 0.1), 0.7, 0.3)
@@ -105,7 +104,7 @@ namespace Visual.RTC
 
         //private void ShearingScalingButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Sphere
+        //    var s = new RTF.Shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.Shearing(1, 0, 0, 0, 0, 0)
         //    };
@@ -116,7 +115,7 @@ namespace Visual.RTC
 
         //private void RotationScalingButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Sphere
+        //    var s = new RTF.Shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.RotationZ(Math.PI / 4)
         //    };
@@ -127,7 +126,7 @@ namespace Visual.RTC
 
         //private void ScalingXButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Sphere
+        //    var s = new RTF.Shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(0.5, 1, 1)
         //    };
@@ -138,7 +137,7 @@ namespace Visual.RTC
 
         //private void ScalingYButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Sphere
+        //    var s = new RTF.Shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(1, 0.5, 1)
         //    };

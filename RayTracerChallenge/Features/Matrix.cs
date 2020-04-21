@@ -47,7 +47,7 @@ namespace RayTracerChallenge.Features
                 Content[i, index] = col[i];
             }
         }
-        
+
         public static Matrix Transpose(Matrix m)
         {
             var M = new Matrix(m.Width, m.Height);
@@ -227,7 +227,7 @@ namespace RayTracerChallenge.Features
         {
             for (int x = 0; x < Height; x++)
                 for (int y = 0; y < Width; y++)
-                    if (Math.Round(this[x, y], p) != Math.Round(m[x, y], p)) 
+                    if (Math.Round(this[x, y], p) != Math.Round(m[x, y], p))
                         return false;
             return true;
         }

@@ -1,16 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using RTF = RayTracerChallenge.Features;
 using RTH = RayTracerChallenge.Helpers;
 
@@ -50,7 +40,7 @@ namespace Visual.RTC
 
             var color = new RTF.Color(255, 255, 255);
 
-            foreach(var point in points)
+            foreach (var point in points)
             {
                 int x = (int)((radius * point.X) + width / 2);
                 int y = (int)((radius * point.Z) + height / 2);

@@ -12,9 +12,9 @@ namespace Visual.RTC
 
         private void Chapter_Click(object sender, RoutedEventArgs e)
         {
-            switch((sender as Button).Name)
+            switch ((sender as Button).Name)
             {
-                case "Chapter1" : new PIT01().Show(); break;
+                case "Chapter1": new PIT01().Show(); break;
                 case "Chapter2": new PIT02().Show(); break;
                 case "Chapter4": new PIT04().Show(); break;
                 case "Chapter5": new PIT05().Show(); break;

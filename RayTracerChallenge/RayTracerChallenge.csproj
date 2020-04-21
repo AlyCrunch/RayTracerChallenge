@@ -58,9 +58,10 @@
     <Compile Include="Features\Matrix.cs" />
     <Compile Include="Features\PointType.cs" />
     <Compile Include="Features\Ray.cs" />
-    <Compile Include="Features\Sphere.cs" />
+    <Compile Include="Features\Shapes\Shape.cs" />
+    <Compile Include="Features\Shapes\Sphere.cs" />
+    <Compile Include="Features\Shapes\TestShape.cs" />
     <Compile Include="Features\World.cs" />
-    <Compile Include="Features\Projectile.cs" />
     <Compile Include="Features\Light.cs" />
     <Compile Include="Helpers\TConverter.cs" />
     <Compile Include="Helpers\ArrayExtension.cs" />

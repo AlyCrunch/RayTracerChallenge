@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
+using obj = Visual.RTC.Objects;
 using RTCf = RayTracerChallenge.Features;
-using RTCh = RayTracerChallenge.Helpers;
 
 namespace Visual.RTC
 {
@@ -24,7 +23,7 @@ namespace Visual.RTC
             using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
                 var result = dialog.ShowDialog();
-                
+
                 FolderPath.Text = dialog.SelectedPath;
             }
         }
@@ -51,16 +50,16 @@ namespace Visual.RTC
                 double.Parse(VelocityY.Text),
                 double.Parse(VelocityZ.Text));
 
-            var proj = new RTCf.Projectile(
+            var proj = new obj.Projectile(
                     RTCf.PointType.Point(0, 1, 0),
                     RTCf.PointType.Vector(vel.Item1, vel.Item2, vel.Item3).Normalize() * m);
-            var env = new RTCf.Environment(
+            var env = new obj.Environment(
                     RTCf.PointType.Vector(0, -0.1, 0),
                     RTCf.PointType.Vector(-0.01, 0, 0));
 
             canvas.WritePixel((int)proj.Position.X, (height - 1) - (int)proj.Position.Y, red);
 
-            foreach (var coord in RTCf.Projectile.GetTick(env, proj))
+            foreach (var coord in obj.Projectile.GetTick(env, proj))
             {
                 canvas.WritePixel((int)coord.X, (height - 1) - (int)coord.Y, red);
             }

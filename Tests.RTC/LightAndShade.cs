@@ -1,6 +1,7 @@
 ﻿using System;
 using RTF = RayTracerChallenge.Features;
 using RTH = RayTracerChallenge.Helpers;
+using RayTracerChallenge.Features.Shapes;
 using Tests.RTC.Helpers;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace Tests.RTC
         [Fact]
         public void NormalSpherePointX()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(1, 0, 0));
             var e = RTF.PointType.Vector(1, 0, 0);
@@ -20,7 +21,7 @@ namespace Tests.RTC
         [Fact]
         public void NormalSpherePointY()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(0, 1, 0));
             var e = RTF.PointType.Vector(0, 1, 0);
@@ -29,7 +30,7 @@ namespace Tests.RTC
         [Fact]
         public void NormalSpherePointZ()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(0, 0, 1));
             var e = RTF.PointType.Vector(0, 0, 1);
@@ -38,7 +39,7 @@ namespace Tests.RTC
         [Fact]
         public void NormalSphereNonAxialPoint()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             double value = Math.Sqrt(3) / 3;
             RTF.PointType n = RTF.Light.NormalAt
                 (s, RTF.PointType.Point(value, value, value));
@@ -48,7 +49,7 @@ namespace Tests.RTC
         [Fact]
         public void NormalIsNormalizedVector()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             double value = Math.Sqrt(3) / 3;
 
             RTF.PointType n = RTF.Light.NormalAt
@@ -60,7 +61,7 @@ namespace Tests.RTC
         [Fact]
         public void NormalOnTranslatedSphere()
         {
-            var s = new RTF.Sphere
+            var s = new Sphere
             {
                 Transform = RTH.Transformations.Translation(0, 1, 0)
             };
@@ -74,7 +75,7 @@ namespace Tests.RTC
         [Fact]
         public void NormalOnTransformedSphere()
         {
-            var s = new RTF.Sphere
+            var s = new Sphere
             {
                 Transform = RTH.Transformations.Scaling(1, 0.5, 1) * RTH.Transformations.RotationZ(Math.PI / 5)
             };
@@ -133,7 +134,7 @@ namespace Tests.RTC
         [Fact]
         public void SphereDefaultMaterial()
         {
-            var s = new RTF.Sphere();
+            var s = new Sphere();
             var m = s.Material;
             var e = new RTF.Material();
             Assert.Equal(e, m);
@@ -145,7 +146,7 @@ namespace Tests.RTC
             {
                 Ambient = 1
             };
-            var s = new RTF.Sphere
+            var s = new Sphere
             {
                 Material = m
             };
