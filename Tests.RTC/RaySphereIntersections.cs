@@ -44,7 +44,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(origin, direction);
             var s = new Sphere();
 
-            var xs = RTH.Transformations.Intersect(s, r);
+            var xs = s.Intersect(r);
 
             Assert.Equal(2, xs.Length);
             Assert.Equal(4, xs[0].T);
@@ -133,7 +133,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(RTF.PointType.Point(0, 0, -5),
                 RTF.PointType.Vector(0, 0, 1));
             var s = new Sphere();
-            var xs = RTF.Intersection.Intersect(s, r);
+            var xs = s.Intersect(r);
 
             Assert.Equal(2, xs.Length);
             Assert.Equal(s, xs[0].Object);
@@ -238,7 +238,7 @@ namespace Tests.RTC
                                 RTF.PointType.Vector(0, 0, 1));
 
             s.Transform = RTH.Transformations.Scaling(2, 2, 2);
-            var xs = RTF.Intersection.Intersect(s, r);
+            var xs = s.Intersect(r);
 
             Assert.Equal(2, xs.Length);
             Assert.Equal(3, xs[0].T);
@@ -251,7 +251,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(RTF.PointType.Point(0, 0, -5),
                                 RTF.PointType.Vector(0, 0, 1));
             s.Transform = RTH.Transformations.Translation(5, 0, 0);
-            var xs = RTF.Intersection.Intersect(s, r);
+            var xs = s.Intersect(r);
 
             Assert.Empty(xs);
         }

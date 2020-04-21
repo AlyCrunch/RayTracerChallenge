@@ -77,7 +77,7 @@ namespace RayTracerChallenge.Helpers
 
         public static Intersection[] Intersect(Sphere s, Ray r)
         {
-            return Intersection.Intersect(s, r);
+            return s.Intersect(r);
         }
 
         public static PointType Position(Ray r, double t)

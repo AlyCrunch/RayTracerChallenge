@@ -1,11 +1,12 @@
 ﻿using RTH = RayTracerChallenge.Helpers;
+using shapes = RayTracerChallenge.Features.Shapes;
 
 namespace RayTracerChallenge.Features
 {
     public class Computation
     {
         public double T { get; set; }
-        public object Object { get; set; }
+        public shapes.Shape Object { get; set; }
         public PointType Point { get; set; }
         public PointType OverPoint { get; set; }
         public PointType EyeV { get; set; }
@@ -22,7 +23,7 @@ namespace RayTracerChallenge.Features
 
             c.Point = RTH.Transformations.Position(r, c.T);
             c.EyeV = -r.Direction;
-            c.NormalV = Light.NormalAt(c.Object, c.Point);
+            c.NormalV = (c.Object as shapes.Shape).NormalAt(c.Point);
 
             if (PointType.DotProduct(c.NormalV, c.EyeV) < 0)
             {

@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RayTracerChallenge.Features.Shapes
 {
-    public class Sphere
+    public class Sphere : Shape
     {
         public double Radius { get; set; }
         public PointType Center { get; set; }
-        public Matrix Transform { get; set; }
-        public Material Material { get; set; }
 
         public Sphere()
         {
@@ -16,10 +15,7 @@ namespace RayTracerChallenge.Features.Shapes
             Transform = Matrix.GetIdentity(4, 4);
             Material = new Material();
         }
-
-        public Matrix GetTransformed()
-            => Matrix.Inverse(Transform);
-        
+                
         public Sphere(PointType center, double radius)
         {
             Center = center;
@@ -43,8 +39,28 @@ namespace RayTracerChallenge.Features.Shapes
             Material = new Material();
         }
 
-        public Intersection[] Intersect(Ray r)
-            => Intersection.Intersect(this, r);
+        protected override Intersection[] LocalIntersect(Ray localRay)
+        {
+            var sphereToRay = localRay.Origin - Center;
+            var a = PointType.DotProduct(localRay.Direction, localRay.Direction);
+            var b = 2 * PointType.DotProduct(localRay.Direction, sphereToRay);
+            var c = PointType.DotProduct(sphereToRay, sphereToRay) - 1;
+
+            var discriminant = Math.Pow(b, 2) - 4 * a * c;
+
+            if (discriminant < 0) return new Intersection[] { };
+
+            var t1 = (-b - Math.Sqrt(discriminant)) / (2 * a);
+            var t2 = (-b + Math.Sqrt(discriminant)) / (2 * a);
+
+            return new Intersection[]
+            { new Intersection(t1, this), new Intersection(t2, this) };
+        }
+
+        protected override PointType LocalNormalAt(PointType localPoint)
+        {
+            return localPoint - Center;
+        }
 
         #region Overriding
         public override bool Equals(object obj)
@@ -60,11 +76,12 @@ namespace RayTracerChallenge.Features.Shapes
         {
             int hashCode = 805375570;
             hashCode = hashCode * -1521134295 + Radius.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<PointType>.Default.GetHashCode(Center);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Matrix>.Default.GetHashCode(Transform);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Material>.Default.GetHashCode(Material);
+            hashCode = hashCode * -1521134295 + Center.GetHashCode();
+            hashCode = hashCode * -1521134295 + Transform.GetHashCode();
+            hashCode = hashCode * -1521134295 + Material.GetHashCode();
             return hashCode;
         }
+
         #endregion
     }
 }

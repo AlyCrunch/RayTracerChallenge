@@ -15,24 +15,6 @@ namespace RayTracerChallenge.Features
             Intensity = intensity;
         }
 
-        public static PointType NormalAt(Sphere s, PointType worldPoint)
-        {
-            var objectPoint = s.Transform.Inverse() * worldPoint;
-            var objectNormal = objectPoint - PointType.Point(0, 0, 0);
-
-            worldPoint = Matrix.Transpose(s.Transform.Inverse()) * objectNormal;
-            worldPoint.W = 0;
-
-            return worldPoint.Normalize();
-        }
-        public static PointType NormalAt(object s, PointType worldPoint)
-        {
-            if (s is Sphere)
-                return NormalAt((Sphere)s, worldPoint);
-            else
-                throw new NotImplementedException();
-        }
-
         public static PointType Reflect(PointType vector, PointType normal)
             => vector - normal * 2 * PointType.DotProduct(vector, normal);
 
@@ -43,7 +25,7 @@ namespace RayTracerChallenge.Features
             var direction = v.Normalize();
 
             var r = new Ray(point, direction);
-            var intersections = Intersection.Intersect(world, r);
+            var intersections = world.Intersect(r);
 
             var h = Intersection.Hit(intersections);
             if (!(h is null) && h.T < distance)

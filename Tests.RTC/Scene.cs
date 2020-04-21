@@ -49,7 +49,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(
                 RTF.PointType.Point(0, 0, -5),
                 RTF.PointType.Vector(0, 0, 1));
-            RTF.Intersection[] xs = RTF.Intersection.Intersect(w, r);
+            RTF.Intersection[] xs = w.Intersect(r);
 
             Assert.Equal(4, xs.Length);
             Assert.Equal(4, xs[0].T);

@@ -1,4 +1,4 @@
-﻿namespace RayTracerChallenge.Features
+﻿namespace RayTracerChallenge.Features.Shapes
 {
     abstract public class Shape
     {

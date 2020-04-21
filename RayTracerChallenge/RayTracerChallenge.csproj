@@ -58,6 +58,7 @@
     <Compile Include="Features\Matrix.cs" />
     <Compile Include="Features\PointType.cs" />
     <Compile Include="Features\Ray.cs" />
+    <Compile Include="Features\Shapes\Plane.cs" />
     <Compile Include="Features\Shapes\Shape.cs" />
     <Compile Include="Features\Shapes\Sphere.cs" />
     <Compile Include="Features\Shapes\TestShape.cs" />

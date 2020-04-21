@@ -4,6 +4,7 @@ using System.Windows;
 using point = RayTracerChallenge.Features.PointType;
 using RTF = RayTracerChallenge.Features;
 using transform = RayTracerChallenge.Helpers.Transformations;
+using shapes = RayTracerChallenge.Features.Shapes;
 
 namespace Visual.RTC
 {
@@ -68,7 +69,7 @@ namespace Visual.RTC
             var world = new RTF.World
             {
                 Light = new RTF.Light(point.Point(-10, 10, -10), RTF.Color.White()),
-                Objects = new List<object>() { floor, leftWall, rightWall, right, middle, right, left }
+                Objects = new List<shapes.Shape>() { floor, leftWall, rightWall, right, middle, right, left }
             };
 
             var camera = new RTF.Camera(100, 50, Math.PI / 3)

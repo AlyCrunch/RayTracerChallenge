@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.RTC
 {
-    public class RefactoringShape
+    public class Plane
     {
         [Fact]
         public void DefaultTransformation()
@@ -86,6 +86,60 @@ namespace Tests.RTC
             var exp = pt.Vector(0, 0.97014, -0.24254);
 
             CustomAssert.Equal(exp, n, 5);
+        }
+
+        [Fact]
+        public void NormalPlaneConstantEverywhere()
+        {
+            var p = new shapes.Plane();
+            var n1 = p.LNormalAt(pt.Point(0, 0, 0));
+            var n2 = p.LNormalAt(pt.Point(10, 0, -10));
+            var n3 = p.LNormalAt(pt.Point(-5, 0, 150));
+
+            Assert.Equal(pt.Vector(0, 1, 0), n1);
+            Assert.Equal(pt.Vector(0, 1, 0), n2);
+            Assert.Equal(pt.Vector(0, 1, 0), n3);
+        }
+        [Fact]
+        public void IntersectWithRayParallelToPlane()
+        {
+            var p = new shapes.Plane();
+            var r = new RTF.Ray(
+                pt.Point(0, 10, 0), pt.Vector(0, 0, 1));
+            var xs = p.LIntersect(r);
+            Assert.Empty(xs);
+        }
+        [Fact]
+        public void IntersectWithCoplanarRay()
+        {
+            var p = new shapes.Plane();
+            var r = new RTF.Ray(
+                pt.Point(0, 0, 0), pt.Vector(0, 0, 1));
+            var xs = p.LIntersect(r);
+            Assert.Empty(xs);
+        }
+
+        [Fact]
+        public void RayIntersectionPlaneFromAbove()
+        {
+            var p = new shapes.Plane();
+            var r = new RTF.Ray(
+                pt.Point(0, 1, 0), pt.Vector(0, -1, 0));
+            var xs = p.LIntersect(r);
+            Assert.NotEmpty(xs);
+            Assert.Equal(1, xs[0].T);
+            Assert.Equal(p, xs[0].Object);
+        }
+        [Fact]
+        public void RayIntersectionPlaneFromBelow()
+        {
+            var p = new shapes.Plane();
+            var r = new RTF.Ray(
+                pt.Point(0, -1, 0), pt.Vector(0, 1, 0));
+            var xs = p.LIntersect(r);
+            Assert.NotEmpty(xs);
+            Assert.Equal(1, xs[0].T);
+            Assert.Equal(p, xs[0].Object);
         }
     }
 }
