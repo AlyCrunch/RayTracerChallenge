@@ -38,6 +38,7 @@ namespace RayTracerChallenge.Features
             var shadowed = Light.IsShadowed(w, comps.OverPoint);
             return Light.Lighting(
                 comps.Object.Material,
+                comps.Object,
                 w.Light,
                 comps.Point,
                 comps.EyeV,

@@ -1,10 +1,10 @@
-﻿using System;
-using RTF = RayTracerChallenge.Features;
-using RTH = RayTracerChallenge.Helpers;
-using pt = RayTracerChallenge.Features.PointType;
-using RayTracerChallenge.Features.Shapes;
+﻿using RayTracerChallenge.Features.Shapes;
+using System;
 using Tests.RTC.Helpers;
 using Xunit;
+using pt = RayTracerChallenge.Features.PointType;
+using RTF = RayTracerChallenge.Features;
+using RTH = RayTracerChallenge.Helpers;
 
 namespace Tests.RTC
 {
@@ -159,7 +159,7 @@ namespace Tests.RTC
 
             var light = new RTF.Light
                 (pt.Point(0, 0, -10), new RTF.Color(1, 1, 1));
-            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
+            var result = RTF.Light.Lighting(m, new Sphere(), light, position, eyeVector, normalVector, false);
 
             CustomAssert.Equal(new RTF.Color(1.9, 1.9, 1.9), result, 5);
 
@@ -170,13 +170,13 @@ namespace Tests.RTC
             var m = new RTF.Material();
             var position = pt.Point(0, 0, 0);
 
-            var eyeVector = pt.Vector(0, Math.Sqrt(2)/2, -Math.Sqrt(2) / 2);
+            var eyeVector = pt.Vector(0, Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2);
             var normalVector = pt.Vector(0, 0, -1);
 
             var light = new RTF.Light
                 (pt.Point(0, 0, -10), new RTF.Color(1, 1, 1));
-            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
-            
+            var result = light.Lighting(m, new Sphere(), position, eyeVector, normalVector, false);
+
             Assert.Equal(new RTF.Color(1, 1, 1), result);
 
         }
@@ -191,7 +191,7 @@ namespace Tests.RTC
 
             var light = new RTF.Light
                 (pt.Point(0, 10, -10), new RTF.Color(1, 1, 1));
-            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
+            var result = light.Lighting(m, new Sphere(), position, eyeVector, normalVector, false);
 
             CustomAssert.Equal(new RTF.Color(0.7364, 0.7364, 0.7364), result, 4);
         }
@@ -206,7 +206,7 @@ namespace Tests.RTC
 
             var light = new RTF.Light
                 (pt.Point(0, 10, -10), new RTF.Color(1, 1, 1));
-            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
+            var result = light.Lighting(m, new Sphere(), position, eyeVector, normalVector, false);
 
             CustomAssert.Equal(new RTF.Color(1.6364, 1.6364, 1.6364), result, 4);
         }
@@ -221,7 +221,7 @@ namespace Tests.RTC
 
             var light = new RTF.Light
                 (pt.Point(0, 0, 10), new RTF.Color(1, 1, 1));
-            var result = RTF.Light.Lighting(m, light, position, eyeVector, normalVector, false);
+            var result = light.Lighting(m, new Sphere(), position, eyeVector, normalVector, false);
 
             Assert.Equal(new RTF.Color(0.1, 0.1, 0.1), result);
         }

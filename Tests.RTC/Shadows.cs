@@ -1,8 +1,8 @@
-﻿using RTF = RayTracerChallenge.Features;
-using RayTracerChallenge.Features.Shapes;
-using t = RayTracerChallenge.Helpers.Transformations;
-using p = RayTracerChallenge.Features.PointType;
+﻿using RayTracerChallenge.Features.Shapes;
 using Xunit;
+using p = RayTracerChallenge.Features.PointType;
+using RTF = RayTracerChallenge.Features;
+using t = RayTracerChallenge.Helpers.Transformations;
 
 namespace Tests.RTC
 {
@@ -22,7 +22,7 @@ namespace Tests.RTC
             var inShadow = true;
 
 
-            var result = RTF.Light.Lighting(m, light, position, eyeV, normalV, inShadow);
+            var result = light.Lighting(m, new Sphere(), position, eyeV, normalV, inShadow);
             var expected = new RTF.Color(0.1, 0.1, 0.1);
 
             Assert.Equal(expected, result);
@@ -72,7 +72,7 @@ namespace Tests.RTC
             var s1 = new Sphere();
             w.Objects.Add(s1);
 
-            var s2 = new Sphere(t.Translation(0,0,10));
+            var s2 = new Sphere(t.Translation(0, 0, 10));
             w.Objects.Add(s2);
 
             var r = new RTF.Ray(p.Point(0, 0, 5), p.Vector(0, 0, 1));
@@ -94,7 +94,7 @@ namespace Tests.RTC
 
             var comps = RTF.Computation.PrepareComputation(i, r);
 
-            Assert.True(comps.OverPoint.Z < -EPSILON/2);
+            Assert.True(comps.OverPoint.Z < -EPSILON / 2);
             Assert.True(comps.Point.Z > comps.OverPoint.Z);
         }
 

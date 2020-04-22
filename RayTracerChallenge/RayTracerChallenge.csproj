@@ -56,6 +56,12 @@
     <Compile Include="Features\Intersection.cs" />
     <Compile Include="Features\Material.cs" />
     <Compile Include="Features\Matrix.cs" />
+    <Compile Include="Features\Patterns\Checker.cs" />
+    <Compile Include="Features\Patterns\Gradient.cs" />
+    <Compile Include="Features\Patterns\Pattern.cs" />
+    <Compile Include="Features\Patterns\Ring.cs" />
+    <Compile Include="Features\Patterns\Stripe.cs" />
+    <Compile Include="Features\Patterns\TestPattern.cs" />
     <Compile Include="Features\PointType.cs" />
     <Compile Include="Features\Ray.cs" />
     <Compile Include="Features\Shapes\Plane.cs" />

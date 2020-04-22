@@ -1,4 +1,5 @@
-﻿using RayTracerChallenge.Features.Shapes;
+﻿using RayTracerChallenge.Features.Patterns;
+using RayTracerChallenge.Features.Shapes;
 using System;
 using System.Collections.Generic;
 
@@ -34,9 +35,13 @@ namespace RayTracerChallenge.Features
                 return false;
         }
 
-        public static Color Lighting(Material material, Light light, PointType point, PointType eyeVector, PointType normalVector, bool inShadow)
+        public static Color Lighting(Material material, Shape obj, Light light, PointType point, PointType eyeVector, PointType normalVector, bool inShadow)
         {
-            var effectiveColor = material.Color * light.Intensity;
+            var color = material.Color;
+            if (material.Pattern != null)
+                color = (material.Pattern as Stripe).AtObject(obj, point);
+
+            var effectiveColor = color * light.Intensity;
             var lightVector = (light.Position - point).Normalize();
 
             var ambient = effectiveColor * material.Ambient;
@@ -51,7 +56,7 @@ namespace RayTracerChallenge.Features
                 diffuse = effectiveColor * material.Diffuse * lightDotNormal;
                 var reflectVector = Reflect(-lightVector, normalVector);
                 var reflectDotEye = PointType.DotProduct(reflectVector, eyeVector);
-                if(reflectDotEye > 0)
+                if (reflectDotEye > 0)
                 {
                     var factor = Math.Pow(reflectDotEye, material.Shininess);
                     specular = light.Intensity * material.Specular * factor;
@@ -60,8 +65,8 @@ namespace RayTracerChallenge.Features
             return ambient + ((!inShadow) ? diffuse + specular : Color.Black());
         }
 
-        public Color Lighting(Material material, PointType point, PointType eyeVector, PointType normalVector)
-            => Lighting(material, this, point, eyeVector, normalVector, false);
+        public Color Lighting(Material material, Shape obj, PointType point, PointType eyeVector, PointType normalVector, bool inShadow)
+            => Lighting(material, obj, this, point, eyeVector, normalVector, inShadow);
 
         #region Overriding
         public override bool Equals(object obj)

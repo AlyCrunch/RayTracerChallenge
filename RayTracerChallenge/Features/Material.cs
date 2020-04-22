@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RayTracerChallenge.Features.Patterns;
 
 namespace RayTracerChallenge.Features
 {
@@ -9,6 +10,7 @@ namespace RayTracerChallenge.Features
         public double Diffuse { get; set; }
         public double Shininess { get; set; }
         public double Specular { get; set; }
+        public Pattern Pattern { get; set; }
 
         public Material()
         {
