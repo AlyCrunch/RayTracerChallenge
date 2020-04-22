@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace RayTracerChallenge.Features
 {
@@ -82,15 +83,15 @@ namespace RayTracerChallenge.Features
         {
             var image = new Canvas(camera.HorizontalSize, camera.VerticalSize);
 
-            for (int y = 0; y < camera.VerticalSize; y++)
+            Parallel.For (0, camera.VerticalSize, y =>
             {
-                for (int x = 0; x < camera.HorizontalSize; x++)
+                Parallel.For(0, camera.HorizontalSize, x =>
                 {
                     var ray = camera.RayForPixel(x, y);
                     var color = world.ColorAt(ray);
                     image.WritePixel(x, y, color);
-                }
-            }
+                });
+            });
 
             return image;
         }

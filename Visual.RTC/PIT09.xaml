@@ -27,8 +27,5 @@
                 x:Name="GenerateButton"
                 Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" Click="GenerateButton_Click"/>
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-        </StackPanel>
     </Grid>
 </Window>

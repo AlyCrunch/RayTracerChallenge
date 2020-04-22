@@ -61,6 +61,7 @@ namespace Visual.RTC
             return RTF.Canvas.Render(camera, world);
         }
 
+
         private void SelectFolder_Click(object sender, RoutedEventArgs e)
         {
             using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
