@@ -31,22 +31,22 @@ namespace Visual.RTC
             var middle = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(-0.5, 1, 0.5),
-                Material = new RTF.Material(RTF.Color.Purple(), 0.7, 0.3)
+                Material = new RTF.Material(RTF.Color.Purple, 0.7, 0.3)
             };
             var right = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(1.5, 0.5, -0.5) * transform.Scaling(0.5, 0.5, 0.5),
-                Material = new RTF.Material(RTF.Color.Lime(), 0.7, 0.3)
+                Material = new RTF.Material(RTF.Color.Lime, 0.7, 0.3)
             };
             var left = new RTF.Shapes.Sphere()
             {
                 Transform = transform.Translation(-1.5, 0.33, -0.75) * transform.Scaling(0.33, 0.33, 0.33),
-                Material = new RTF.Material(RTF.Color.Cyan(), 0.7, 0.3)
+                Material = new RTF.Material(RTF.Color.Cyan, 0.7, 0.3)
             };
 
             var world = new RTF.World
             {
-                Light = new RTF.Light(point.Point(-10, 10, -10), RTF.Color.White()),
+                Light = new RTF.Light(point.Point(-10, 10, -10), RTF.Color.White),
                 Objects = new List<RTF.Shapes.Shape>() { ceilling, right, middle, right, left }
             };
 

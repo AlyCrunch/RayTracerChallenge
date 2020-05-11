@@ -56,10 +56,15 @@
     <Compile Include="Features\Intersection.cs" />
     <Compile Include="Features\Material.cs" />
     <Compile Include="Features\Matrix.cs" />
+    <Compile Include="Features\Patterns\Blended.cs" />
     <Compile Include="Features\Patterns\Checker.cs" />
     <Compile Include="Features\Patterns\Gradient.cs" />
+    <Compile Include="Features\Patterns\Nested.cs" />
     <Compile Include="Features\Patterns\Pattern.cs" />
+    <Compile Include="Features\Patterns\Perturbed.cs" />
+    <Compile Include="Features\Patterns\RadialGradient.cs" />
     <Compile Include="Features\Patterns\Ring.cs" />
+    <Compile Include="Features\Patterns\Solid.cs" />
     <Compile Include="Features\Patterns\Stripe.cs" />
     <Compile Include="Features\Patterns\TestPattern.cs" />
     <Compile Include="Features\PointType.cs" />
@@ -70,6 +75,7 @@
     <Compile Include="Features\Shapes\TestShape.cs" />
     <Compile Include="Features\World.cs" />
     <Compile Include="Features\Light.cs" />
+    <Compile Include="Helpers\ImprovedNoise.cs" />
     <Compile Include="Helpers\TConverter.cs" />
     <Compile Include="Helpers\ArrayExtension.cs" />
     <Compile Include="Helpers\Transformations.cs" />

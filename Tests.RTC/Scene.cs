@@ -22,7 +22,7 @@ namespace Tests.RTC
         {
             var light = new RTF.Light(
                 RTF.PointType.Point(-10, 10, -10),
-                RTF.Color.White());
+                RTF.Color.White);
 
             var s1 = new Sphere(
                         new RTF.Material(
@@ -66,7 +66,7 @@ namespace Tests.RTC
                    RTF.PointType.Vector(0, 0, 1));
             var shape = new Sphere();
             var i = new RTF.Intersection(4, shape);
-            var comps = RTF.Computation.PrepareComputation(i, r);
+            var comps = RTF.Computation.PrepareComputations(i, r);
 
             Assert.Equal(i.T, comps.T);
             Assert.Equal(i.Object, comps.Object);
@@ -83,7 +83,7 @@ namespace Tests.RTC
                    RTF.PointType.Vector(0, 0, 1));
             var shape = new Sphere();
             var i = new RTF.Intersection(4, shape);
-            var comps = RTF.Computation.PrepareComputation(i, r);
+            var comps = RTF.Computation.PrepareComputations(i, r);
 
             Assert.False(comps.Inside);
         }
@@ -96,7 +96,7 @@ namespace Tests.RTC
                    RTF.PointType.Vector(0, 0, 1));
             var shape = new Sphere();
             var i = new RTF.Intersection(1, shape);
-            var comps = RTF.Computation.PrepareComputation(i, r);
+            var comps = RTF.Computation.PrepareComputations(i, r);
 
 
             Assert.Equal(RTF.PointType.Point(0, 0, 1), comps.Point);
@@ -115,7 +115,7 @@ namespace Tests.RTC
             var shape = w.Objects[0];
             var i = new RTF.Intersection(4, shape);
 
-            var comps = RTF.Computation.PrepareComputation(i, r);
+            var comps = RTF.Computation.PrepareComputations(i, r);
             var c = w.ShadeHit(comps);
             var exp = new RTF.Color(0.38066, 0.47583, 0.2855);
             //var exp = new RTF.Color(0.50066, 0.57583, 0.42550);
@@ -128,14 +128,14 @@ namespace Tests.RTC
             var w = RTF.World.Default();
             w.Light = new RTF.Light(
                       RTF.PointType.Point(0, 0.25, 0),
-                      RTF.Color.White());
+                      RTF.Color.White);
             var r = new RTF.Ray(
                       RTF.PointType.Point(0, 0, 0),
                       RTF.PointType.Vector(0, 0, 1));
             var shape = w.Objects[1];
 
             var i = new RTF.Intersection(0.5, shape);
-            var comps = RTF.Computation.PrepareComputation(i, r);
+            var comps = RTF.Computation.PrepareComputations(i, r);
             var c = w.ShadeHit(comps);
             var exp = new RTF.Color(0.90498, 0.90498, 0.90498);
 
@@ -150,7 +150,7 @@ namespace Tests.RTC
                       RTF.PointType.Point(0, 0, -5),
                       RTF.PointType.Vector(0, 1, 0));
             var c = w.ColorAt(r);
-            var exp = RTF.Color.Black();
+            var exp = RTF.Color.Black;
 
             CustomAssert.Equal(exp, c, 5);
         }

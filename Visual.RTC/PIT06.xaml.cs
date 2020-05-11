@@ -18,7 +18,7 @@ namespace Visual.RTC
         public RTF.Canvas CreateCircle(RTF.Shapes.Sphere s)
         {
             var lightPos = RTF.PointType.Point(-10, 10, -10);
-            var light = new RTF.Light(lightPos, RTF.Color.White());
+            var light = new RTF.Light(lightPos, RTF.Color.White);
 
             var rayOrigin = RTF.PointType.Point(0, 0, -5);
             double wallZ = 10;
@@ -27,10 +27,10 @@ namespace Visual.RTC
             double pixelSize = wallSize / canvasPixel;
             double half = wallSize / 2;
 
-            var canvas = new RTF.Canvas(canvasPixel, canvasPixel, RTF.Color.Black());
+            var canvas = new RTF.Canvas(canvasPixel, canvasPixel, RTF.Color.Black);
 
             var shape = s;
-            shape.Material.Color = RTF.Color.Magenta();
+            shape.Material.Color = RTF.Color.Magenta;
 
             for (int y = 0; y < canvasPixel; y++)
             {
@@ -53,6 +53,7 @@ namespace Visual.RTC
                         
                         var color = RTF.Light.Lighting(
                             (hit.Object as RTF.Shapes.Sphere).Material,
+                            hit.Object,
                             light,
                             point,
                             eye,

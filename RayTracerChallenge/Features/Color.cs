@@ -4,26 +4,21 @@ namespace RayTracerChallenge.Features
 {
     public class Color
     {
-        public double Red { get; set; }
-        public double Green { get; set; }
-        public double Blue { get; set; }
+        public double R { get; set; } = 0;
+        public double G { get; set; } = 0;
+        public double B { get; set; } = 0;
 
-        public int Red256 { get => To256(Red); }
-        public int Green256 { get => To256(Green); }
-        public int Blue256 { get => To256(Blue); }
+        public int Red256 { get => To256(R); }
+        public int Green256 { get => To256(G); }
+        public int Blue256 { get => To256(B); }
 
         public Color(double red, double green, double blue)
         {
-            Red = red;
-            Green = green;
-            Blue = blue;
+            R = red;
+            G = green;
+            B = blue;
         }
-        public Color()
-        {
-            Red = 0;
-            Green = 0;
-            Blue = 0;
-        }
+        public Color() { }
 
         public string To256()
             => $"{Red256} {Green256} {Blue256}";
@@ -38,35 +33,36 @@ namespace RayTracerChallenge.Features
 
         #region operator
         public static Color operator +(Color a, Color b)
-            => new Color(a.Red + b.Red, a.Green + b.Green, a.Blue + b.Blue);
+            => new Color(a.R + b.R, a.G + b.G, a.B + b.B);
         public static Color operator -(Color a, Color b)
-            => new Color(a.Red - b.Red, a.Green - b.Green, a.Blue - b.Blue);
+            => new Color(a.R - b.R, a.G - b.G, a.B - b.B);
         public static Color operator *(Color a, int s)
-            => new Color(a.Red * s, a.Green * s, a.Blue * s);
+            => new Color(a.R * s, a.G * s, a.B * s);
 
         #region Colors
-        public static Color Black() => new Color(0, 0, 0);
-        public static Color White() => new Color(1, 1, 1);
-        public static Color Red_() => new Color(1, 0, 0);
-        public static Color Lime() => new Color(0, 1, 0);
-        public static Color Blue_() => new Color(0, 0, 1);
-        public static Color Yellow() => new Color(1, 1, 0);
-        public static Color Magenta() => new Color(1, 0, 1);
-        public static Color Cyan() => new Color(0, 1, 1);
-        public static Color Silver() => new Color(0.75, 0.75, 0.75);
-        public static Color Gray() => new Color(0.5, 0.5, 0.5);
-        public static Color Maroon() => new Color(0.5, 0, 0);
-        public static Color Olive() => new Color(0.5, 0.5, 0);
-        public static Color Green_() => new Color(0, 0.5, 0);
-        public static Color Purple() => new Color(0.5, 0, 0.5);
-        public static Color Teal() => new Color(0, 0.5, 0.5);
-        public static Color Navy() => new Color(0, 0, 0.5);
+        public static Color Black { get => new Color(0, 0, 0); }
+        public static Color White { get => new Color(1, 1, 1); }
+        public static Color Red { get => new Color(1, 0, 0); }
+        public static Color Lime { get => new Color(0, 1, 0); }
+        public static Color Blue { get => new Color(0, 0, 1); }
+        public static Color Yellow { get => new Color(1, 1, 0); }
+        public static Color Magenta { get => new Color(1, 0, 1); }
+        public static Color Cyan { get => new Color(0, 1, 1); }
+        public static Color Silver { get => new Color(0.75, 0.75, 0.75); }
+        public static Color Gray { get => new Color(0.5, 0.5, 0.5); }
+        public static Color Maroon { get => new Color(0.5, 0, 0); }
+        public static Color Olive { get => new Color(0.5, 0.5, 0); }
+        public static Color Green { get => new Color(0, 0.5, 0); }
+        public static Color Purple { get => new Color(0.5, 0, 0.5); }
+        public static Color Pink { get => new Color(1, 0.5, 0.93); }
+        public static Color Teal { get => new Color(0, 0.5, 0.5); }
+        public static Color Navy { get => new Color(0, 0, 0.5); }
         #endregion
 
         public static Color operator *(Color a, double s)
-            => new Color(a.Red * s, a.Green * s, a.Blue * s);
+            => new Color(a.R * s, a.G * s, a.B * s);
         public static Color operator *(Color a, Color b)
-            => new Color(a.Red * b.Red, a.Green * b.Green, a.Blue * b.Blue);
+            => new Color(a.R * b.R, a.G * b.G, a.B * b.B);
 
         #endregion
 
@@ -75,32 +71,32 @@ namespace RayTracerChallenge.Features
         public override bool Equals(object obj)
         {
             return obj is Color color &&
-                   Red == color.Red &&
-                   Green == color.Green &&
-                   Blue == color.Blue;
+                   R == color.R &&
+                   G == color.G &&
+                   B == color.B;
         }
 
         public bool Equals(object obj, int p)
         {
             return obj is Color color &&
-                   Math.Round(Red, p) == Math.Round(color.Red, p) &&
-                   Math.Round(Green, p) == Math.Round(color.Green, p) &&
-                   Math.Round(Blue, p) == Math.Round(color.Blue, p);
+                   Math.Round(R, p) == Math.Round(color.R, p) &&
+                   Math.Round(G, p) == Math.Round(color.G, p) &&
+                   Math.Round(B, p) == Math.Round(color.B, p);
         }
 
         public override int GetHashCode()
         {
             var hashCode = -1058441243;
-            hashCode = hashCode * -1521134295 + Red.GetHashCode();
-            hashCode = hashCode * -1521134295 + Green.GetHashCode();
-            hashCode = hashCode * -1521134295 + Blue.GetHashCode();
+            hashCode = hashCode * -1521134295 + R.GetHashCode();
+            hashCode = hashCode * -1521134295 + G.GetHashCode();
+            hashCode = hashCode * -1521134295 + B.GetHashCode();
             return hashCode;
         }
 
         public override string ToString()
-            => $"({Red}, {Green}, {Blue})";
+            => $"({R}, {G}, {B})";
         public string ToString(string format)
-            => $"({Red.ToString(format)}, {Green.ToString(format)}, {Blue.ToString(format)})";
+            => $"({R.ToString(format)}, {G.ToString(format)}, {B.ToString(format)})";
 
         public static bool operator ==(Color a, Color b)
             => a.Equals(b);

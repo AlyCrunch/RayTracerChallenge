@@ -18,7 +18,7 @@ namespace Tests.RTC
 
             var eyeV = p.Vector(0, 0, -1);
             var normalV = p.Vector(0, 0, -1);
-            var light = new RTF.Light(p.Point(0, 0, -10), RTF.Color.White());
+            var light = new RTF.Light(p.Point(0, 0, -10), RTF.Color.White);
             var inShadow = true;
 
 
@@ -66,7 +66,7 @@ namespace Tests.RTC
         {
             var w = new RTF.World
             {
-                Light = new RTF.Light(p.Point(0, 0, -10), RTF.Color.White())
+                Light = new RTF.Light(p.Point(0, 0, -10), RTF.Color.White)
             };
 
             var s1 = new Sphere();
@@ -78,7 +78,7 @@ namespace Tests.RTC
             var r = new RTF.Ray(p.Point(0, 0, 5), p.Vector(0, 0, 1));
             var i = new RTF.Intersection(4, s2);
 
-            var comps = RTF.Computation.PrepareComputation(i, r);
+            var comps = RTF.Computation.PrepareComputations(i, r);
             var c = w.ShadeHit(comps);
 
             var expected = new RTF.Color(0.1, 0.1, 0.1);
@@ -92,7 +92,7 @@ namespace Tests.RTC
             var shape = new Sphere(t.Translation(0, 0, 1));
             var i = new RTF.Intersection(5, shape);
 
-            var comps = RTF.Computation.PrepareComputation(i, r);
+            var comps = RTF.Computation.PrepareComputations(i, r);
 
             Assert.True(comps.OverPoint.Z < -EPSILON / 2);
             Assert.True(comps.Point.Z > comps.OverPoint.Z);

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Visual.RTC"
         mc:Ignorable="d"
-        Title="PIT07" Height="450" Width="800">
+        Title="PIT09" Height="450" Width="800">
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition/>

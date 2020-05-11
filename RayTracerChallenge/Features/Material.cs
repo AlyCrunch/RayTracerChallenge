@@ -5,29 +5,23 @@ namespace RayTracerChallenge.Features
 {
     public class Material
     {
-        public double Ambient { get; set; }
-        public Color Color { get; set; }
-        public double Diffuse { get; set; }
-        public double Shininess { get; set; }
-        public double Specular { get; set; }
+        public double Ambient { get; set; } = 0.1;
+        public Color Color { get; set; } = Color.White;
+        public double Diffuse { get; set; } = 0.9;
+        public double Shininess { get; set; } = 200;
+        public double Specular { get; set; } = 0.9;
         public Pattern Pattern { get; set; }
+        public double Reflective { get; set; } = 0;
+        public double Transparency { get; set; } = 0;
+        public double RefractiveIndex { get; set; } = 1;
 
-        public Material()
-        {
-            Color = new Color(1, 1, 1);
-            Ambient = 0.1;
-            Diffuse = 0.9;
-            Specular = 0.9;
-            Shininess = 200;
-        }
+        public Material() { }
 
         public Material(Color color, double diffuse, double specular)
         {
             Color = color;
             Diffuse = diffuse;
             Specular = specular;
-            Ambient = 0.1;
-            Shininess = 200;
         }
 
         #region Overriding

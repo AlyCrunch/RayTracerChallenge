@@ -39,15 +39,15 @@ namespace RayTracerChallenge.Features
         {
             var color = material.Color;
             if (material.Pattern != null)
-                color = (material.Pattern as Stripe).AtObject(obj, point);
+                color = material.Pattern.AtObject(obj, point);
 
             var effectiveColor = color * light.Intensity;
             var lightVector = (light.Position - point).Normalize();
 
             var ambient = effectiveColor * material.Ambient;
 
-            var diffuse = Color.Black();
-            var specular = Color.Black();
+            var diffuse = Color.Black;
+            var specular = Color.Black;
 
             var lightDotNormal = PointType.DotProduct(lightVector, normalVector);
 
@@ -62,7 +62,7 @@ namespace RayTracerChallenge.Features
                     specular = light.Intensity * material.Specular * factor;
                 }
             }
-            return ambient + ((!inShadow) ? diffuse + specular : Color.Black());
+            return ambient + ((!inShadow) ? diffuse + specular : Color.Black);
         }
 
         public Color Lighting(Material material, Shape obj, PointType point, PointType eyeVector, PointType normalVector, bool inShadow)

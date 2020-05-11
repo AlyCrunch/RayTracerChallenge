@@ -68,7 +68,7 @@ namespace Visual.RTC
 
             var world = new RTF.World
             {
-                Light = new RTF.Light(point.Point(-10, 10, -10), RTF.Color.White()),
+                Light = new RTF.Light(point.Point(-10, 10, -10), RTF.Color.White),
                 Objects = new List<shapes.Shape>() { floor, leftWall, rightWall, right, middle, right, left }
             };
 

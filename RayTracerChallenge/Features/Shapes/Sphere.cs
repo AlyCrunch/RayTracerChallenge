@@ -15,7 +15,7 @@ namespace RayTracerChallenge.Features.Shapes
             Transform = Matrix.GetIdentity(4, 4);
             Material = new Material();
         }
-                
+
         public Sphere(PointType center, double radius)
         {
             Center = center;
@@ -37,6 +37,19 @@ namespace RayTracerChallenge.Features.Shapes
             Center = PointType.Point(0, 0, 0);
             Transform = transform;
             Material = new Material();
+        }
+
+        public static Sphere Glass()
+        {
+            return new Sphere()
+            {
+                Transform = Matrix.GetIdentity(),
+                Material = new Material()
+                {
+                    Transparency = 1,
+                    RefractiveIndex = 1.5
+                }
+            };
         }
 
         protected override Intersection[] LocalIntersect(Ray localRay)
