@@ -104,6 +104,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PIT11.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PIT02.xaml.cs">
@@ -126,6 +130,9 @@
     </Compile>
     <Compile Include="PIT10.xaml.cs">
       <DependentUpon>PIT10.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PIT11.xaml.cs">
+      <DependentUpon>PIT11.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
