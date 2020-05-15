@@ -1,4 +1,6 @@
-﻿namespace RayTracerChallenge.Features.Shapes
+﻿using System;
+
+namespace RayTracerChallenge.Features.Shapes
 {
     abstract public class Shape
     {
@@ -46,5 +48,11 @@
         }
 
         abstract protected PointType LocalNormalAt(PointType localPoint);
+
+        public static double Max(double a, double b, double c)
+            => Math.Max(a, Math.Max(b, c));
+
+        public static double Min(double a, double b, double c)
+            => Math.Min(a, Math.Min(b, c));
     }
 }

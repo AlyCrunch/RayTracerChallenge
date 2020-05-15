@@ -16,8 +16,8 @@ namespace RayTracerChallenge.Features.Shapes
             (var ytmin, var ytmax) = CheckAxis(localRay.Origin.Y, localRay.Direction.Y);
             (var ztmin, var ztmax) = CheckAxis(localRay.Origin.Z, localRay.Direction.Z);
 
-            var tmin = Math.Max(Math.Max(xtmin, ytmin), ztmin);
-            var tmax = Math.Min(Math.Min(xtmax, ytmax), ztmax);
+            var tmin = Max(xtmin, ytmin, ztmin);
+            var tmax = Min(xtmax, ytmax, ztmax);
 
             if (tmin > tmax) return new Intersection[] { };
 
@@ -29,7 +29,7 @@ namespace RayTracerChallenge.Features.Shapes
 
         protected override PointType LocalNormalAt(PointType point)
         {
-            var maxC = Math.Max(Math.Max(Math.Abs(point.X), Math.Abs(point.Y)), Math.Abs(point.Z));
+            var maxC = Max(Math.Abs(point.X), Math.Abs(point.Y), Math.Abs(point.Z));
 
             if(maxC == Math.Abs(point.X))
                 return PointType.Vector(point.X, 0, 0);

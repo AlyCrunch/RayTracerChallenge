@@ -69,7 +69,9 @@
     <Compile Include="Features\Patterns\TestPattern.cs" />
     <Compile Include="Features\PointType.cs" />
     <Compile Include="Features\Ray.cs" />
+    <Compile Include="Features\Shapes\Cone.cs" />
     <Compile Include="Features\Shapes\Cube.cs" />
+    <Compile Include="Features\Shapes\Cylinder.cs" />
     <Compile Include="Features\Shapes\Plane.cs" />
     <Compile Include="Features\Shapes\Shape.cs" />
     <Compile Include="Features\Shapes\Sphere.cs" />

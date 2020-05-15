@@ -56,6 +56,7 @@ namespace RayTracerChallenge.Features
         public PointType Normalize()
         {
             var m = Magnetude();
+            if (m == 0) return new PointType(0, 0, 0, 0);
 
             return new PointType(
                 X / m,
