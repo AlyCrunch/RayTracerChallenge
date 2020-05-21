@@ -6,9 +6,16 @@ namespace RayTracerChallenge.Features.Shapes
     public class Cylinder : Shape
     {
         const double EPSILON = 0.00001;
+
         public double Maximum { get; set; } = double.PositiveInfinity;
         public double Minimum { get; set; } = double.NegativeInfinity;
         public bool Closed { get; set; } = false;
+
+        public Cylinder()
+        {
+            Transform = Matrix.GetIdentity();
+            Material = new Material();
+        }
 
         protected override Intersection[] LocalIntersect(Ray ray)
         {
@@ -82,6 +89,14 @@ namespace RayTracerChallenge.Features.Shapes
                 xs.Add(new Intersection(t, cyl));
 
             return xs;
+        }
+
+        public override BoundingBox Bounds()
+        {
+            var min = PointType.Point(-1, Minimum, -1);
+            var max = PointType.Point(1, Maximum, 1);
+
+            return new BoundingBox(min, max);
         }
     }
 }

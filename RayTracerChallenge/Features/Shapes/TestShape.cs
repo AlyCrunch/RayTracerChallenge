@@ -1,4 +1,5 @@
 ﻿using System;
+using pt = RayTracerChallenge.Features.PointType;
 
 namespace RayTracerChallenge.Features.Shapes
 {
@@ -33,6 +34,9 @@ namespace RayTracerChallenge.Features.Shapes
             return PointType.Vector(localPoint.X, localPoint.Y, localPoint.Z);
         }
 
+        public override BoundingBox Bounds()
+            => new BoundingBox(pt.Point(-1, -1, -1), pt.Point(1, 1, 1));
+
         #region Overriding
         public override bool Equals(object obj)
         {
@@ -53,6 +57,7 @@ namespace RayTracerChallenge.Features.Shapes
         {
             return base.ToString();
         }
+
         #endregion
     }
 }

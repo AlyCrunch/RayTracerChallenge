@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using pt = RayTracerChallenge.Features.PointType;
 
 namespace RayTracerChallenge.Features.Shapes
 {
@@ -26,7 +23,6 @@ namespace RayTracerChallenge.Features.Shapes
                 new Intersection(tmax, this)
             };
         }
-
         protected override PointType LocalNormalAt(PointType point)
         {
             var maxC = Max(Math.Abs(point.X), Math.Abs(point.Y), Math.Abs(point.Z));
@@ -60,5 +56,8 @@ namespace RayTracerChallenge.Features.Shapes
             if (tmin > tmax) return new Tuple<double, double>(tmax, tmin);
             return new Tuple<double, double>(tmin, tmax);
         }
+        
+        public override BoundingBox Bounds()
+            => new BoundingBox(pt.Point(-1, -1, -1), pt.Point(1, 1, 1));
     }
 }

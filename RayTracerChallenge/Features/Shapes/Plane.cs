@@ -1,4 +1,5 @@
 ﻿using System;
+using pt = RayTracerChallenge.Features.PointType;
 
 namespace RayTracerChallenge.Features.Shapes
 {
@@ -20,5 +21,10 @@ namespace RayTracerChallenge.Features.Shapes
         protected override PointType LocalNormalAt(PointType localPoint)
             => PointType.Vector(0, 1, 0);
         public PointType LNormalAt(PointType p) => LocalNormalAt(p);
+
+        public override BoundingBox Bounds()
+        => new BoundingBox(
+            pt.Point(double.NegativeInfinity, 0, double.NegativeInfinity),
+            pt.Point(double.PositiveInfinity, 0, double.PositiveInfinity));
     }
 }

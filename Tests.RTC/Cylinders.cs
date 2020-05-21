@@ -1,11 +1,7 @@
-﻿using System;
-using Tests.RTC.Helpers;
+﻿using Tests.RTC.Helpers;
 using Xunit;
 using pt = RayTracerChallenge.Features.PointType;
 using shape = RayTracerChallenge.Features.Shapes;
-using pattern = RayTracerChallenge.Features.Patterns;
-using transform = RayTracerChallenge.Helpers.Transformations;
-using c = RayTracerChallenge.Features.Color;
 using RayTracerChallenge.Features;
 
 namespace Tests.RTC

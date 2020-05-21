@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using pt = RayTracerChallenge.Features.PointType;
 
 namespace RayTracerChallenge.Features.Shapes
 {
@@ -75,6 +75,9 @@ namespace RayTracerChallenge.Features.Shapes
             return localPoint - Center;
         }
 
+        public override BoundingBox Bounds() 
+            => new BoundingBox(pt.Point(-1, -1, -1), pt.Point(1, 1, 1));
+
         #region Overriding
         public override bool Equals(object obj)
         {
@@ -94,7 +97,6 @@ namespace RayTracerChallenge.Features.Shapes
             hashCode = hashCode * -1521134295 + Material.GetHashCode();
             return hashCode;
         }
-
         #endregion
     }
 }

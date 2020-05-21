@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RayTracerChallenge.Features.Shapes
 {
@@ -12,6 +9,12 @@ namespace RayTracerChallenge.Features.Shapes
         public double Maximum { get; set; } = double.PositiveInfinity;
         public double Minimum { get; set; } = double.NegativeInfinity;
         public bool Closed { get; set; } = false;
+
+        public Cone()
+        {
+            Transform = Matrix.GetIdentity();
+            Material = new Material();
+        }
 
         protected override Intersection[] LocalIntersect(Ray ray)
         {
@@ -97,6 +100,18 @@ namespace RayTracerChallenge.Features.Shapes
                 xs.Add(new Intersection(t, cone));
 
             return xs;
+        }
+
+        public override BoundingBox Bounds()
+        {
+            var r = Math.Max(
+                Math.Abs(Minimum),
+                Math.Abs(Maximum));
+
+            var min = PointType.Point(-r, Minimum, -r);
+            var max = PointType.Point(r, Maximum, r);
+
+            return new BoundingBox(min, max);
         }
     }
 }

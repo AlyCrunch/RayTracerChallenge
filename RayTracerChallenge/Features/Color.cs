@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 
 namespace RayTracerChallenge.Features
 {
@@ -29,6 +30,23 @@ namespace RayTracerChallenge.Features
             if (newc > 255) return 255;
             if (newc < 0) return 0;
             return (int)Math.Round(newc);
+        }
+
+        public static Color From256(int r, int g, int b)
+            => new Color(r / 256, g / 256, b / 256);
+
+        public static Color FromHex(string color)
+        {
+            if (color.Length < 6 && color.Length > 7) throw new Exception("Invalid color");
+            
+            if(color[0] == '#')
+                color = color.Remove(0, 1);
+
+            var hexR = color.Substring(0, 2);
+            var hexG = color.Substring(2, 2);
+            var hexB = color.Substring(4, 2);
+
+            return From256(Convert.ToInt32(hexR, 16), Convert.ToInt32(hexG, 16), Convert.ToInt32(hexB, 16));
         }
 
         #region operator

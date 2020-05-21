@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace RayTracerChallenge.Features.Shapes
 {
@@ -7,6 +8,8 @@ namespace RayTracerChallenge.Features.Shapes
         public Matrix Transform { get; set; }
         public Material Material { get; set; }
         public Ray SavedRay { get; set; }
+        public Shape Parent { get; set; } = null;
+        public bool HasParent => Parent != null;
 
         public Shape()
         {
@@ -39,20 +42,39 @@ namespace RayTracerChallenge.Features.Shapes
 
         public PointType NormalAt(PointType point)
         {
-            var localPoint = Transform.Inverse() * point;
+            var localPoint = WorldToObject(point);
             var localNormal = LocalNormalAt(localPoint);
-            var worldNormal = Matrix.Transpose(Transform.Inverse()) * localNormal;
-            worldNormal.W = 0;
-            
-            return worldNormal.Normalize();
+            return NormalToWorld(localNormal);
         }
 
         abstract protected PointType LocalNormalAt(PointType localPoint);
 
+        abstract public BoundingBox Bounds();
+        public BoundingBox ParentSpaceBounds()
+            => Bounds().Transform(Transform);
+
         public static double Max(double a, double b, double c)
             => Math.Max(a, Math.Max(b, c));
-
         public static double Min(double a, double b, double c)
             => Math.Min(a, Math.Min(b, c));
+
+        public PointType WorldToObject(PointType point)
+        {
+            if (HasParent)
+                point = Parent.WorldToObject(point);
+
+            return Transform.Inverse() * point;
+        }
+        public PointType NormalToWorld(PointType normal)
+        {
+            normal = Transform.Inverse().Transpose() * normal;
+            normal.W = 0;
+            normal = normal.Normalize();
+
+            if (HasParent)
+                normal = Parent.NormalToWorld(normal);
+
+            return normal;
+        }
     }
 }

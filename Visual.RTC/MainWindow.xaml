@@ -36,7 +36,12 @@
                     VerticalAlignment="Center">
             <Button x:Name="Chapter10" Content="Chapter 10" Click="Chapter_Click"/>
             <Button x:Name="Chapter11" Content="Chapter 11" Click="Chapter_Click"/>
-            <Button x:Name="Chapter12" Content="Chapter 12" Click="Chapter_Click" IsEnabled="False"/>
+            <Button x:Name="Chapter12" Content="Chapter 12" Click="Chapter_Click"/>
+            <Button x:Name="Chapter13" Content="Chapter 13" Click="Chapter_Click" IsEnabled="False"/>
+            <Button x:Name="Chapter14" Content="Chapter 14" Click="Chapter_Click" IsEnabled="False"/>
+            <Button x:Name="Chapter15" Content="Chapter 15" Click="Chapter_Click" IsEnabled="False"/>
+            <Button x:Name="Chapter16" Content="Chapter 16" Click="Chapter_Click" IsEnabled="False"/>
+            <Button x:Name="Chapter17" Content="Chapter 17" Click="Chapter_Click" IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Window>
