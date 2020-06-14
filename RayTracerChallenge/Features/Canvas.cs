@@ -82,7 +82,7 @@ namespace RayTracerChallenge.Features
         public static Canvas Render(Camera camera, World world)
         {
             var image = new Canvas(camera.HorizontalSize, camera.VerticalSize);
-
+            int i = 0;
             Parallel.For (0, camera.VerticalSize, y =>
             {
                 Parallel.For(0, camera.HorizontalSize, x =>
@@ -90,6 +90,8 @@ namespace RayTracerChallenge.Features
                     var ray = camera.RayForPixel(x, y);
                     var color = world.ColorAt(ray);
                     image.WritePixel(x, y, color);
+                    i++;
+                    System.Console.WriteLine($"Pixel processed : {i}");
                 });
             });
 

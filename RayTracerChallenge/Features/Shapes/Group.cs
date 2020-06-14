@@ -7,7 +7,6 @@ namespace RayTracerChallenge.Features.Shapes
     public class Group : Shape
     {
         public List<Shape> Children { get; set; } = new List<Shape>();
-
         public Shape this[int index]
         {
             get => Children[index];
@@ -42,7 +41,6 @@ namespace RayTracerChallenge.Features.Shapes
             s.Parent = null;
             Children.Remove(s);
         }
-
         public void RemoveAt(int index)
         {
             Children[index].Parent = null;
@@ -51,22 +49,23 @@ namespace RayTracerChallenge.Features.Shapes
 
         public bool IsEmpty() => Children.Count == 0;
         public int Count() => Children.Count;
+
+        public bool Contains(Shape s) => Children.Contains(s);
         #endregion
 
-        protected override Intersection[] LocalIntersect(Ray localRay)
+        protected override Intersection[] LocalIntersect(Ray ray)
         {
-            if (!Bounds().Intersects(localRay)) return new Intersection[] { };
+            if (!Bounds().Intersects(ray)) return new Intersection[] { };
 
             List<Intersection> childrenIntersections = new List<Intersection>();
             foreach (var child in Children)
             {
-                childrenIntersections.AddRange(child.Intersect(localRay));
+                childrenIntersections.AddRange(child.Intersect(ray));
             }
 
             return childrenIntersections.OrderBy(i => i.T).ToArray();
         }
-
-        protected override PointType LocalNormalAt(PointType localPoint)
+        protected override PointType LocalNormalAt(PointType localPoint, Intersection hit = null)
         {
             throw new NotImplementedException();
         }
@@ -108,7 +107,6 @@ namespace RayTracerChallenge.Features.Shapes
             }
             return (left, right);
         }
-
         public void Subgroup(List<Shape> list)
         {
             var subgroup = new Group
@@ -118,7 +116,6 @@ namespace RayTracerChallenge.Features.Shapes
             subgroup.Add(list.Select(shape => { shape.Parent = subgroup; return shape; }));
             Add(subgroup);
         }
-
         public void Divide(int threshold)
         {
             if (threshold <= Count())
@@ -133,6 +130,34 @@ namespace RayTracerChallenge.Features.Shapes
                 if (child is Group)
                     (child as Group).Divide(threshold);
             }
+        }
+
+        public override bool Includes(Shape obj)
+            => Children.Contains(obj);
+
+        public override bool Equals(object obj)
+        {
+            return obj is Group group &&
+                   base.Equals(obj) &&
+                   Transform == group.Transform &&
+                   Material == group.Material &&
+                   SavedRay == group.SavedRay &&
+                   Parent == group.Parent &&
+                   HasParent == group.HasParent &&
+                   Children == group.Children;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1690011931;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + Transform.GetHashCode();
+            hashCode = hashCode * -1521134295 + Material.GetHashCode();
+            hashCode = hashCode * -1521134295 + SavedRay.GetHashCode();
+            hashCode = hashCode * -1521134295 + Parent.GetHashCode();
+            hashCode = hashCode * -1521134295 + HasParent.GetHashCode();
+            hashCode = hashCode * -1521134295 + Children.GetHashCode();
+            return hashCode;
         }
     }
 }

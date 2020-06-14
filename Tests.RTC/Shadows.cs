@@ -1,4 +1,5 @@
 ﻿using RayTracerChallenge.Features.Shapes;
+using System.Collections.Generic;
 using Xunit;
 using p = RayTracerChallenge.Features.PointType;
 using RTF = RayTracerChallenge.Features;
@@ -66,7 +67,7 @@ namespace Tests.RTC
         {
             var w = new RTF.World
             {
-                Light = new RTF.Light(p.Point(0, 0, -10), RTF.Color.White)
+                Lights = new List<RTF.Light>() { new RTF.Light(p.Point(0, 0, -10), RTF.Color.White) }
             };
 
             var s1 = new Sphere();

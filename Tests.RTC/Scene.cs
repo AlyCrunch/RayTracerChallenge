@@ -4,6 +4,7 @@ using RayTracerChallenge.Features.Shapes;
 using RTH = RayTracerChallenge.Helpers;
 using Tests.RTC.Helpers;
 using Xunit;
+using System.Linq;
 
 namespace Tests.RTC
 {
@@ -14,7 +15,7 @@ namespace Tests.RTC
         {
             var w = new RTF.World();
             Assert.Empty(w.Objects);
-            Assert.Null(w.Light);
+            Assert.Empty(w.Lights);
         }
 
         [Fact]
@@ -37,7 +38,7 @@ namespace Tests.RTC
 
             RTF.World w = RTF.World.Default();
 
-            Assert.Equal(light, w.Light);
+            Assert.Equal(light, w.Lights.First());
             Assert.Contains(s1, w.Objects);
             Assert.Contains(s2, w.Objects);
         }
@@ -126,9 +127,11 @@ namespace Tests.RTC
         public void ShadingIntersectionFromInside()
         {
             var w = RTF.World.Default();
-            w.Light = new RTF.Light(
-                      RTF.PointType.Point(0, 0.25, 0),
-                      RTF.Color.White);
+            w.Lights = new System.Collections.Generic.List<RTF.Light>() {
+                            new RTF.Light(
+                                  RTF.PointType.Point(0, 0.25, 0),
+                                  RTF.Color.White)
+                        };
             var r = new RTF.Ray(
                       RTF.PointType.Point(0, 0, 0),
                       RTF.PointType.Vector(0, 0, 1));

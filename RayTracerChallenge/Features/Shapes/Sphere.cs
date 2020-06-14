@@ -52,11 +52,12 @@ namespace RayTracerChallenge.Features.Shapes
             };
         }
 
-        protected override Intersection[] LocalIntersect(Ray localRay)
+        protected override Intersection[] LocalIntersect(Ray ray)
         {
-            var sphereToRay = localRay.Origin - Center;
-            var a = PointType.DotProduct(localRay.Direction, localRay.Direction);
-            var b = 2 * PointType.DotProduct(localRay.Direction, sphereToRay);
+            if (!Bounds().Intersects(ray)) return new Intersection[] { };
+            var sphereToRay = ray.Origin - Center;
+            var a = PointType.DotProduct(ray.Direction, ray.Direction);
+            var b = 2 * PointType.DotProduct(ray.Direction, sphereToRay);
             var c = PointType.DotProduct(sphereToRay, sphereToRay) - 1;
 
             var discriminant = Math.Pow(b, 2) - 4 * a * c;
@@ -70,7 +71,7 @@ namespace RayTracerChallenge.Features.Shapes
             { new Intersection(t1, this), new Intersection(t2, this) };
         }
 
-        protected override PointType LocalNormalAt(PointType localPoint)
+        protected override PointType LocalNormalAt(PointType localPoint, Intersection hit = null)
         {
             return localPoint - Center;
         }
@@ -85,7 +86,10 @@ namespace RayTracerChallenge.Features.Shapes
                    Radius == sphere.Radius &&
                    Center.Equals(sphere.Center) &&
                    Transform.Equals(sphere.Transform) &&
-                   Material.Equals(sphere.Material);
+                   Material.Equals(sphere.Material) &&
+                   SavedRay == sphere.SavedRay &&
+                   Parent == sphere.Parent &&
+                   HasParent == sphere.HasParent;
         }
 
         public override int GetHashCode()

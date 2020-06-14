@@ -8,7 +8,6 @@ using transform = RayTracerChallenge.Helpers.Transformations;
 using c = RayTracerChallenge.Features.Color;
 using RayTracerChallenge.Features;
 using System.Linq;
-using Newtonsoft.Json.Bson;
 
 namespace Tests.RTC
 {

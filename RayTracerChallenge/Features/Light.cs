@@ -21,18 +21,23 @@ namespace RayTracerChallenge.Features
 
         public static bool IsShadowed(World world, PointType point)
         {
-            var v = world.Light.Position - point;
-            var distance = v.Magnetude();
-            var direction = v.Normalize();
+            foreach (var light in world.Lights)
+            {
+                var v = light.Position - point;
+                var distance = v.Magnetude();
+                var direction = v.Normalize();
 
-            var r = new Ray(point, direction);
-            var intersections = world.Intersect(r);
+                var r = new Ray(point, direction);
+                var intersections = world.Intersect(r);
 
-            var h = Intersection.Hit(intersections);
-            if (!(h is null) && h.T < distance)
-                return true;
-            else
-                return false;
+                var h = Intersection.Hit(intersections);
+                if (!(h is null) && h.T < distance)
+                    continue;
+                else
+                    return false;
+            }
+
+            return true;
         }
 
         public static Color Lighting(Material material, Shape obj, Light light, PointType point, PointType eyeVector, PointType normalVector, bool inShadow)

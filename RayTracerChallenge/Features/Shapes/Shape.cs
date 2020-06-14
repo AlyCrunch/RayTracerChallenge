@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace RayTracerChallenge.Features.Shapes
 {
@@ -40,23 +40,51 @@ namespace RayTracerChallenge.Features.Shapes
 
         abstract protected Intersection[] LocalIntersect(Ray localRay);
 
-        public PointType NormalAt(PointType point)
+        public PointType NormalAt(PointType point, Intersection hit = null)
         {
             var localPoint = WorldToObject(point);
-            var localNormal = LocalNormalAt(localPoint);
+            var localNormal = LocalNormalAt(localPoint, hit);
             return NormalToWorld(localNormal);
         }
 
-        abstract protected PointType LocalNormalAt(PointType localPoint);
+        abstract protected PointType LocalNormalAt(PointType localPoint, Intersection hit = null);
 
         abstract public BoundingBox Bounds();
         public BoundingBox ParentSpaceBounds()
             => Bounds().Transform(Transform);
 
+        public virtual bool Includes(Shape obj) => obj == this;
+
         public static double Max(double a, double b, double c)
             => Math.Max(a, Math.Max(b, c));
+        public static double Max(params double[] values)
+        {
+            var max = double.NegativeInfinity;
+            foreach(var val in values)
+            {
+                max = Math.Max(max, val);
+            }
+            return max;
+        }
         public static double Min(double a, double b, double c)
             => Math.Min(a, Math.Min(b, c));
+        public static double Min(params double[] values)
+        {
+            var min = double.PositiveInfinity;
+            foreach (var val in values)
+            {
+                min = Math.Min(min, val);
+            }
+            return min;
+        }
+        public static PointType Min(PointType a, PointType b, PointType c)
+        {
+            return PointType.Point(Min(a.X, b.X, c.X), Min(a.Y, b.Y, c.Y), Min(a.Z, b.Z, c.Z));
+        }
+        public static PointType Max(PointType a, PointType b, PointType c)
+        {
+            return PointType.Point(Max(a.X, b.X, c.X), Max(a.Y, b.Y, c.Y), Max(a.Z, b.Z, c.Z));
+        }
 
         public PointType WorldToObject(PointType point)
         {
@@ -75,6 +103,26 @@ namespace RayTracerChallenge.Features.Shapes
                 normal = Parent.NormalToWorld(normal);
 
             return normal;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Shape shape &&
+                   Transform.Equals(shape.Transform) &&
+                   Material.Equals(shape.Material) &&
+                   SavedRay == shape.SavedRay &&
+                   Parent == shape.Parent &&
+                   HasParent == shape.HasParent;
+        }
+        public override int GetHashCode()
+        {
+            int hashCode = 1533363371; 
+            hashCode = hashCode * -1521134295 + Transform.GetHashCode();
+            hashCode = hashCode * -1521134295 + Material.GetHashCode();
+            hashCode = hashCode * -1521134295 + SavedRay.GetHashCode();
+            hashCode = hashCode * -1521134295 + Parent.GetHashCode();
+            hashCode = hashCode * -1521134295 + HasParent.GetHashCode();
+            return hashCode;
         }
     }
 }

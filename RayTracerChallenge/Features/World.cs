@@ -9,15 +9,18 @@ namespace RayTracerChallenge.Features
     public class World
     {
         public List<Shape> Objects { get; set; } = new List<Shape>();
-        public Light Light { get; set; }
+        public List<Light> Lights { get; set; } = new List<Light>();
 
         public static World Default()
         {
             return new World
             {
-                Light = new Light(
+                Lights = new List<Light>()
+                {
+                    new Light(
                     PointType.Point(-10, 10, -10),
-                    Color.White),
+                    Color.White)
+                },
                 Objects = new List<Shape>
                 {
                     new Sphere(
@@ -39,15 +42,19 @@ namespace RayTracerChallenge.Features
 
         public static Color ShadeHit(World w, Computation comps, int remaining = 5)
         {
-            var shadowed = Light.IsShadowed(w, comps.OverPoint);
-            var surface = Light.Lighting(
-                comps.Object.Material,
-                comps.Object,
-                w.Light,
-                comps.Point,
-                comps.EyeV,
-                comps.NormalV,
-                shadowed);
+            var surface = Color.Black;
+            foreach (var Light in w.Lights)
+            {
+                var shadowed = Light.IsShadowed(w, comps.OverPoint);
+                surface += Light.Lighting(
+                    comps.Object.Material,
+                    comps.Object,
+                    Light,
+                    comps.Point,
+                    comps.EyeV,
+                    comps.NormalV,
+                    shadowed);
+            }
 
             var reflected = w.ReflectedColor(comps, remaining);
             var refracted = w.RefractedColor(comps, remaining);

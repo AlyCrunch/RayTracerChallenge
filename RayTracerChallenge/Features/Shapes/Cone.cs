@@ -18,6 +18,8 @@ namespace RayTracerChallenge.Features.Shapes
 
         protected override Intersection[] LocalIntersect(Ray ray)
         {
+            if (!Bounds().Intersects(ray)) return new Intersection[] { };
+
             var xs = new List<Intersection>();
 
             var d = ray.Direction;
@@ -59,7 +61,7 @@ namespace RayTracerChallenge.Features.Shapes
             return xs.ToArray();
         }
 
-        protected override PointType LocalNormalAt(PointType point)
+        protected override PointType LocalNormalAt(PointType point, Intersection hit = null)
         {
             var dist = point.X * point.X + point.Z * point.Z;
 
@@ -112,6 +114,33 @@ namespace RayTracerChallenge.Features.Shapes
             var max = PointType.Point(r, Maximum, r);
 
             return new BoundingBox(min, max);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cone cone &&
+                   Transform.Equals(cone.Transform) &&
+                   Material.Equals(cone.Material) &&
+                   SavedRay == cone.SavedRay &&
+                   Parent.Equals(cone.Parent) &&
+                   HasParent == cone.HasParent &&
+                   Maximum == cone.Maximum &&
+                   Minimum == cone.Minimum &&
+                   Closed == cone.Closed;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 205049560;
+            hashCode = hashCode * -1521134295 + Transform.GetHashCode();
+            hashCode = hashCode * -1521134295 + Material.GetHashCode();
+            hashCode = hashCode * -1521134295 + SavedRay.GetHashCode();
+            hashCode = hashCode * -1521134295 + Parent.GetHashCode();
+            hashCode = hashCode * -1521134295 + HasParent.GetHashCode();
+            hashCode = hashCode * -1521134295 + Maximum.GetHashCode();
+            hashCode = hashCode * -1521134295 + Minimum.GetHashCode();
+            hashCode = hashCode * -1521134295 + Closed.GetHashCode();
+            return hashCode;
         }
     }
 }

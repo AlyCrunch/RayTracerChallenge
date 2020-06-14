@@ -7,6 +7,8 @@ namespace RayTracerChallenge.Features
     {
         public double T { get; set; }
         public Shape Object { get; set; }
+        public double U { get; set; }
+        public double V { get; set; }
 
         public Intersection(double t, Shape @object)
         {
@@ -27,5 +29,8 @@ namespace RayTracerChallenge.Features
                      .OrderBy(x => x.T)
                      .First();
         }
+
+        public static Intersection WithUV(double t, Shape @object, double u, double v)
+            => new Intersection(t, @object) { U = u, V = v };
     }
 }

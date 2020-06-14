@@ -118,7 +118,7 @@ namespace RayTracerChallenge.Features
         }
 
         public static bool IsInvertible(Matrix m)
-            => Determinant(m) == 0 ? false : true;
+            => Determinant(m) != 0;
         public bool IsInvertible() => IsInvertible(this);
 
         public static Matrix Inverse(Matrix a)

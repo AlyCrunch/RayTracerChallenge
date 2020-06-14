@@ -19,6 +19,8 @@ namespace RayTracerChallenge.Features.Shapes
 
         protected override Intersection[] LocalIntersect(Ray ray)
         {
+            if (!Bounds().Intersects(ray)) return new Intersection[] { };
+
             var xs = new List<Intersection>();
             var a = Math.Pow(ray.Direction.X, 2) + Math.Pow(ray.Direction.Z, 2);
 
@@ -52,7 +54,7 @@ namespace RayTracerChallenge.Features.Shapes
             return xs.ToArray();
         }
 
-        protected override PointType LocalNormalAt(PointType point)
+        protected override PointType LocalNormalAt(PointType point, Intersection hit = null)
         {
             var dist = point.X * point.X + point.Z * point.Z;
 
@@ -97,6 +99,35 @@ namespace RayTracerChallenge.Features.Shapes
             var max = PointType.Point(1, Maximum, 1);
 
             return new BoundingBox(min, max);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cylinder cylinder &&
+                   base.Equals(obj) &&
+                   Transform.Equals(cylinder.Transform) &&
+                   Material.Equals(cylinder.Material) &&
+                   SavedRay == cylinder.SavedRay &&
+                   Parent.Equals(cylinder.Parent) &&
+                   HasParent == cylinder.HasParent &&
+                   Maximum == cylinder.Maximum &&
+                   Minimum == cylinder.Minimum &&
+                   Closed == cylinder.Closed;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1481798398;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + Transform.GetHashCode();
+            hashCode = hashCode * -1521134295 + Material.GetHashCode();
+            hashCode = hashCode * -1521134295 + SavedRay.GetHashCode();
+            hashCode = hashCode * -1521134295 + Parent.GetHashCode();
+            hashCode = hashCode * -1521134295 + HasParent.GetHashCode();
+            hashCode = hashCode * -1521134295 + Maximum.GetHashCode();
+            hashCode = hashCode * -1521134295 + Minimum.GetHashCode();
+            hashCode = hashCode * -1521134295 + Closed.GetHashCode();
+            return hashCode;
         }
     }
 }

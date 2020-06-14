@@ -20,7 +20,7 @@ namespace Visual.RTC
 
         public RTF.Canvas CreateCircle()
         {
-            var floor = new RTF.Shapes.Sphere()
+            var floor = new shapes.Sphere()
             {
                 Transform = transform.Scaling(10, 0.01, 10),
                 Material = new RTF.Material()
@@ -30,7 +30,7 @@ namespace Visual.RTC
                 }
             };
 
-            var leftWall = new RTF.Shapes.Sphere()
+            var leftWall = new shapes.Sphere()
             {
                 Transform = transform.Translation(0, 0, 5)
                             * transform.RotationY(-Math.PI / 4)
@@ -39,7 +39,7 @@ namespace Visual.RTC
                 Material = floor.Material
             };
 
-            var rightWall = new RTF.Shapes.Sphere()
+            var rightWall = new shapes.Sphere()
             {
                 Transform = transform.Translation(0, 0, 5)
                             * transform.RotationY(Math.PI / 4)
@@ -48,19 +48,19 @@ namespace Visual.RTC
                 Material = floor.Material
             };
 
-            var middle = new RTF.Shapes.Sphere()
+            var middle = new shapes.Sphere()
             {
                 Transform = transform.Translation(-0.5, 1, 0.5),
                 Material = new RTF.Material(new RTF.Color(0.1, 1, 0.5), 0.7, 0.3)
             };
 
-            var right = new RTF.Shapes.Sphere()
+            var right = new shapes.Sphere()
             {
                 Transform = transform.Translation(1.5, 0.5, -0.5) * transform.Scaling(0.5, 0.5, 0.5),
                 Material = new RTF.Material(new RTF.Color(0.5, 1, 0.1), 0.7, 0.3)
             };
 
-            var left = new RTF.Shapes.Sphere()
+            var left = new shapes.Sphere()
             {
                 Transform = transform.Translation(-1.5, 0.33, -0.75) * transform.Scaling(0.33, 0.33, 0.33),
                 Material = new RTF.Material(new RTF.Color(1, 0.8, 0.1), 0.7, 0.3)
@@ -68,7 +68,7 @@ namespace Visual.RTC
 
             var world = new RTF.World
             {
-                Light = new RTF.Light(point.Point(-10, 10, -10), RTF.Color.White),
+                Lights = new List<RTF.Light>() { new RTF.Light(point.Point(-10, 10, -10), RTF.Color.White) },
                 Objects = new List<shapes.Shape>() { floor, leftWall, rightWall, right, middle, right, left }
             };
 
@@ -105,7 +105,7 @@ namespace Visual.RTC
 
         //private void ShearingScalingButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Shapes.Sphere
+        //    var s = new shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.Shearing(1, 0, 0, 0, 0, 0)
         //    };
@@ -116,7 +116,7 @@ namespace Visual.RTC
 
         //private void RotationScalingButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Shapes.Sphere
+        //    var s = new shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(0.5, 1, 1) * RTH.Transformations.RotationZ(Math.PI / 4)
         //    };
@@ -127,7 +127,7 @@ namespace Visual.RTC
 
         //private void ScalingXButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Shapes.Sphere
+        //    var s = new shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(0.5, 1, 1)
         //    };
@@ -138,7 +138,7 @@ namespace Visual.RTC
 
         //private void ScalingYButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    var s = new RTF.Shapes.Sphere
+        //    var s = new shapes.Sphere
         //    {
         //        Transform = RTH.Transformations.Scaling(1, 0.5, 1)
         //    };

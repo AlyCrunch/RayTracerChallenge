@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using pt = RayTracerChallenge.Features.PointType;
 
 namespace RayTracerChallenge.Features.Shapes
@@ -7,11 +8,19 @@ namespace RayTracerChallenge.Features.Shapes
     {
         const double EPSILON = 0.00001;
 
-        protected override Intersection[] LocalIntersect(Ray localRay)
+        public Cube(){}
+        public Cube(Material m, Matrix t)
         {
-            (var xtmin, var xtmax) = CheckAxis(localRay.Origin.X, localRay.Direction.X);
-            (var ytmin, var ytmax) = CheckAxis(localRay.Origin.Y, localRay.Direction.Y);
-            (var ztmin, var ztmax) = CheckAxis(localRay.Origin.Z, localRay.Direction.Z);
+            Transform = t;
+            Material = m;
+        }
+
+        protected override Intersection[] LocalIntersect(Ray ray)
+        {
+            if (!Bounds().Intersects(ray)) return new Intersection[] { };
+            (var xtmin, var xtmax) = CheckAxis(ray.Origin.X, ray.Direction.X);
+            (var ytmin, var ytmax) = CheckAxis(ray.Origin.Y, ray.Direction.Y);
+            (var ztmin, var ztmax) = CheckAxis(ray.Origin.Z, ray.Direction.Z);
 
             var tmin = Max(xtmin, ytmin, ztmin);
             var tmax = Min(xtmax, ytmax, ztmax);
@@ -23,7 +32,7 @@ namespace RayTracerChallenge.Features.Shapes
                 new Intersection(tmax, this)
             };
         }
-        protected override PointType LocalNormalAt(PointType point)
+        protected override PointType LocalNormalAt(PointType point, Intersection hit = null)
         {
             var maxC = Max(Math.Abs(point.X), Math.Abs(point.Y), Math.Abs(point.Z));
 
@@ -59,5 +68,26 @@ namespace RayTracerChallenge.Features.Shapes
         
         public override BoundingBox Bounds()
             => new BoundingBox(pt.Point(-1, -1, -1), pt.Point(1, 1, 1));
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cube cube &&
+                   Transform.Equals(cube.Transform) &&
+                   Material.Equals(cube.Material) &&
+                   SavedRay == cube.SavedRay &&
+                   Parent == cube.Parent &&
+                   HasParent == cube.HasParent;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1533363371;
+            hashCode = hashCode * -1521134295 + Transform.GetHashCode();
+            hashCode = hashCode * -1521134295 + Material.GetHashCode();
+            hashCode = hashCode * -1521134295 + SavedRay.GetHashCode();
+            hashCode = hashCode * -1521134295 + Parent.GetHashCode();
+            hashCode = hashCode * -1521134295 + HasParent.GetHashCode();
+            return hashCode;
+        }
     }
 }

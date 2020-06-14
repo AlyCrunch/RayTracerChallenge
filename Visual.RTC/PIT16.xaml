@@ -1,0 +1,45 @@
+﻿<Window x:Class="Visual.RTC.PIT16"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Visual.RTC"
+        mc:Ignorable="d"
+        Title="PIT16" Height="450" Width="800">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Folder" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom"
+                Click="SelectFolder_Click" Margin="0,0,10,0"/>
+        <TextBox x:Name="FolderPath" Grid.Column="1" Grid.ColumnSpan="5"
+                 VerticalAlignment="Bottom"
+                 Text="D:\Users\aliso\Desktop\test_RT"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Lens" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                x:Name="Lens"
+                Click="Lens_Click"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="Six Sided dice" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                x:Name="Dice"
+                Click="Dice_Click"/>
+        <Button Grid.Column="3" Grid.Row="1" Content="Block Letter" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                x:Name="BlockLetter"
+                Click="BlockLetter_Click"/>
+        <Button Grid.Column="4" Grid.Row="1" Content="Flower" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                x:Name="Flower"
+                Click="Flower_Click"/>
+        <Button Grid.Column="5" Grid.Row="1" Content="Saturn" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                x:Name="Saturn"
+                Click="Saturn_Click"/>
+    </Grid>
+</Window>

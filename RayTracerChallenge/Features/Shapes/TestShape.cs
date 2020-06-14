@@ -26,10 +26,11 @@ namespace RayTracerChallenge.Features.Shapes
         protected override Intersection[] LocalIntersect(Ray localRay)
         {
             SavedRay = localRay;
+            if (!Bounds().Intersects(localRay)) return new Intersection[] { };
             return Array.Empty<Intersection>();
         }
 
-        protected override PointType LocalNormalAt(PointType localPoint)
+        protected override PointType LocalNormalAt(PointType localPoint, Intersection hit = null)
         {
             return PointType.Vector(localPoint.X, localPoint.Y, localPoint.Z);
         }

@@ -30,12 +30,15 @@ namespace Visual.RTC
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             GenerateButton.IsEnabled = false;
             var canvasSize = new Tuple<int, int>(int.Parse(WidthCanvas.Text), int.Parse(HeightCanvas.Text));
             RTCf.Canvas canvas = GenerateProjectile(canvasSize.Item1, canvasSize.Item2);
 
 
-            string filename = $"{FolderPath.Text}\\{FileName.Text}[{WidthCanvas.Text}x{HeightCanvas.Text}][{VelocityX.Text},{VelocityY.Text},{VelocityZ.Text}][{Magnetude.Text}].ppm";
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            string filename = $"{FolderPath.Text}\\{FileName.Text}[{WidthCanvas.Text}x{HeightCanvas.Text}][{VelocityX.Text},{VelocityY.Text},{VelocityZ.Text}][{Magnetude.Text}] [{elapsedMs}ms].ppm";
             canvas.SaveAsPPMFile(filename);
             GenerateButton.IsEnabled = true;
         }

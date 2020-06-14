@@ -67,10 +67,15 @@
     <Compile Include="Features\Patterns\Solid.cs" />
     <Compile Include="Features\Patterns\Stripe.cs" />
     <Compile Include="Features\Patterns\TestPattern.cs" />
+    <Compile Include="Features\Patterns\TextureMap.cs" />
+    <Compile Include="Features\Patterns\UV\AlignCheck.cs" />
+    <Compile Include="Features\Patterns\UV\Checker.cs" />
+    <Compile Include="Features\Patterns\UV\Pattern.cs" />
     <Compile Include="Features\PointType.cs" />
     <Compile Include="Features\Ray.cs" />
     <Compile Include="Features\Shapes\BoundingBox.cs" />
     <Compile Include="Features\Shapes\Cone.cs" />
+    <Compile Include="Features\Shapes\CSG.cs" />
     <Compile Include="Features\Shapes\Cube.cs" />
     <Compile Include="Features\Shapes\Cylinder.cs" />
     <Compile Include="Features\Shapes\Group.cs" />
@@ -78,8 +83,11 @@
     <Compile Include="Features\Shapes\Shape.cs" />
     <Compile Include="Features\Shapes\Sphere.cs" />
     <Compile Include="Features\Shapes\TestShape.cs" />
+    <Compile Include="Features\Shapes\Torus.cs" />
+    <Compile Include="Features\Shapes\Triangle.cs" />
     <Compile Include="Features\World.cs" />
     <Compile Include="Features\Light.cs" />
+    <Compile Include="Helpers\FileParser.cs" />
     <Compile Include="Helpers\ImprovedNoise.cs" />
     <Compile Include="Helpers\TConverter.cs" />
     <Compile Include="Helpers\ArrayExtension.cs" />

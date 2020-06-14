@@ -34,7 +34,7 @@ namespace RayTracerChallenge.Features
 
             c.Point = transform.Position(r, c.T);
             c.EyeV = -r.Direction;
-            c.NormalV = (c.Object as Shape).NormalAt(c.Point);
+            c.NormalV = (c.Object as Shape).NormalAt(c.Point, i);
 
             if (PointType.DotProduct(c.NormalV, c.EyeV) < 0)
             {

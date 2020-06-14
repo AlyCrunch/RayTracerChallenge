@@ -110,7 +110,7 @@ namespace Tests.RTC
         {
             var w = new World
             {
-                Light = new Light(pt.Point(0, 0, 0), c.White)
+                Lights = new System.Collections.Generic.List<Light>() { new Light(pt.Point(0, 0, 0), c.White) }
             };
 
             var lower = new shape.Plane();
