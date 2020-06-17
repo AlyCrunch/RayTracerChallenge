@@ -20,11 +20,11 @@ namespace RayTracerChallenge.Features
 
         public bool IsVector
         {
-            get => (W == 0) ? true : false;
+            get => (W == 0);
         }
         public bool IsPoint
         {
-            get => (W == 1) ? true : false;
+            get => (W == 1);
         }
 
         #region Operators

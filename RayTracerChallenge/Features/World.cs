@@ -1,8 +1,8 @@
-﻿using RayTracerChallenge.Helpers;
-using System.Collections.Generic;
-using RayTracerChallenge.Features.Shapes;
-using System.Linq;
+﻿using RayTracerChallenge.Features.Shapes;
+using RayTracerChallenge.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RayTracerChallenge.Features
 {
@@ -60,7 +60,7 @@ namespace RayTracerChallenge.Features
             var refracted = w.RefractedColor(comps, remaining);
 
             var material = comps.Object.Material;
-            if(material.Reflective > 0 && material.Transparency > 0)
+            if (material.Reflective > 0 && material.Transparency > 0)
             {
                 var reflectance = comps.Schlick();
                 return surface
@@ -109,7 +109,7 @@ namespace RayTracerChallenge.Features
 
             var refractRay = new Ray(comps.UnderPoint, direction);
 
-            var color = ColorAt(refractRay, remaining - 1) * 
+            var color = ColorAt(refractRay, remaining - 1) *
                 comps.Object.Material.Transparency;
 
             return color;

@@ -105,10 +105,10 @@ namespace RayTracerChallenge.Features.Shapes
         {
             return obj is Cylinder cylinder &&
                    base.Equals(obj) &&
-                   Transform.Equals(cylinder.Transform) &&
-                   Material.Equals(cylinder.Material) &&
+                   Transform == cylinder.Transform &&
+                   Material == cylinder.Material &&
                    SavedRay == cylinder.SavedRay &&
-                   Parent.Equals(cylinder.Parent) &&
+                   Parent == cylinder.Parent &&
                    HasParent == cylinder.HasParent &&
                    Maximum == cylinder.Maximum &&
                    Minimum == cylinder.Minimum &&

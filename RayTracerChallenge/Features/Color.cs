@@ -13,11 +13,11 @@ namespace RayTracerChallenge.Features
         public int Green256 { get => To256(G); }
         public int Blue256 { get => To256(B); }
 
-        public Color(double red, double green, double blue)
+        public Color(double red, double green, double blue, int @base = 1)
         {
-            R = red;
-            G = green;
-            B = blue;
+            R = red / @base;
+            G = green / @base;
+            B = blue / @base;
         }
         public Color() { }
 
@@ -38,8 +38,8 @@ namespace RayTracerChallenge.Features
         public static Color FromHex(string color)
         {
             if (color.Length < 6 && color.Length > 7) throw new Exception("Invalid color");
-            
-            if(color[0] == '#')
+
+            if (color[0] == '#')
                 color = color.Remove(0, 1);
 
             var hexR = color.Substring(0, 2);
@@ -66,6 +66,7 @@ namespace RayTracerChallenge.Features
         public static Color Yellow { get => new Color(1, 1, 0); }
         public static Color Magenta { get => new Color(1, 0, 1); }
         public static Color Cyan { get => new Color(0, 1, 1); }
+        public static Color Brown { get => new Color(1, 0.5, 0); }
         public static Color Silver { get => new Color(0.75, 0.75, 0.75); }
         public static Color Gray { get => new Color(0.5, 0.5, 0.5); }
         public static Color Maroon { get => new Color(0.5, 0, 0); }
